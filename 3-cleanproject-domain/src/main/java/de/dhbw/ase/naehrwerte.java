@@ -1,3 +1,5 @@
+package de.dhbw.ase;
+
 public class naehrwerte {
 
     energie energie;

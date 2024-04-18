@@ -1,3 +1,5 @@
+package de.dhbw.ase;
+
 public class rezeptZutat {
     private String name;
     private String amount;

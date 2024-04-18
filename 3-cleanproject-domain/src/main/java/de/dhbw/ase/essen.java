@@ -1,3 +1,5 @@
+package de.dhbw.ase;
+
 public class essen {
     private String name;
     private rezept rezept;

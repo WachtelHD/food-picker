@@ -1,13 +1,13 @@
 package de.dhbw.ase;
 public class functions {
 
-    public essenNachKategorie(){
+    // public essenNachKategorie(){
 
-    }
+    // }
 
-    public essenSpiel(){
-        // mit Kategorie?
-        // zufälliges essen suchen
-    } 
+    // public essenSpiel(){
+    //     // mit Kategorie?
+    //     // zufälliges essen suchen
+    // } 
 
 }

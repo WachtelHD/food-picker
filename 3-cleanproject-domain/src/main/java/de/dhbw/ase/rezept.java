@@ -1,3 +1,5 @@
+package de.dhbw.ase;
+
 import java.util.List;
 
 public class rezept {
