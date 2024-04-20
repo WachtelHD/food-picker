@@ -14,13 +14,14 @@ public class Starter {
 		System.out.println("3 - Essensauswahl spiel");
 		System.out.println("4 - Essensauswahl spiel mit spezifisscher Richtung");
 
-		System.out.print("Auswahl: 1");
+		System.out.print("Auswahl: ");
 
 		Scanner in = new Scanner(System.in);
 		spielTyp = in.nextInt();
-
 		switch (spielTyp) {
 			case 1:
+			    get get = new get();
+				get.getProductInfo();
 				// Falls infos über Spezifisches Produkt gefragt sind diese ausgeben
 				break;
 			case 2:
@@ -33,6 +34,7 @@ public class Starter {
 				// Spiel für Produkte in bestimmter Richtung
 				break;
 			default:
+				//TODO: change error
 				System.out.println("Es ist ein fehler aufgetreten");
 				break;
 		}
