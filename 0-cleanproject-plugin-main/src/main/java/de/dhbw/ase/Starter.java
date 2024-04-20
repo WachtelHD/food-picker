@@ -18,13 +18,17 @@ public class Starter {
 
 		Scanner in = new Scanner(System.in);
 		spielTyp = in.nextInt();
+
+		get get = new get();
 		switch (spielTyp) {
 			case 1:
-			    get get = new get();
-				get.getProductInfo();
+				System.out.print("Essens Auswahl: ");
+				String essensTyp = in.nextLine();
+				get.getProductInfo(essensTyp);
 				// Falls infos über Spezifisches Produkt gefragt sind diese ausgeben
 				break;
 			case 2:
+				get.getProductRange();
 				// Falls gerichte für eine Richtung gewünscht sind diese ausgeben
 				break;
 			case 3:
