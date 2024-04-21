@@ -11,8 +11,9 @@ public class Starter {
 		System.out.println("Hallo, was kann ich für dich tun");
 		System.out.println("1 - Infos zu einem spezifischen Produkt ausgeben");
 		System.out.println("2 - Gerichtsvorschläge einer spezifischen Richtung");
-		System.out.println("3 - Essensauswahl spiel");
-		System.out.println("4 - Essensauswahl spiel mit spezifisscher Richtung");
+		System.out.println("3 - Zufälliges Essen");
+		System.out.println("4 - Essensauswahl spiel");
+		System.out.println("5 - Essensauswahl spiel mit spezifisscher Richtung");
 
 		System.out.print("Auswahl: ");
 
@@ -32,9 +33,13 @@ public class Starter {
 				// Falls gerichte für eine Richtung gewünscht sind diese ausgeben
 				break;
 			case 3:
-				// Falls eine Spiel gestartet werden soll mehrere Produkte wählen
+				get.getRandomFood();
+				// Zufälliges essen
 				break;
 			case 4:
+				// Falls eine Spiel gestartet werden soll mehrere Produkte wählen
+				break;
+			case 5:
 				// Spiel für Produkte in bestimmter Richtung
 				break;
 			default:
