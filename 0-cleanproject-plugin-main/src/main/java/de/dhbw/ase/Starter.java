@@ -6,6 +6,10 @@ public class Starter {
 
 	// pom.xml überprüfen
 	public static void main(String[] args) {
+		get get = new get();
+		functions functions = new functions();
+
+		
 		Integer spielTyp = 0;
 		// Nutzer nach Zielsetzung Fragen
 		System.out.println("Hallo, was kann ich für dich tun");
@@ -20,7 +24,6 @@ public class Starter {
 		Scanner in = new Scanner(System.in);
 		spielTyp = in.nextInt();
 
-		get get = new get();
 		switch (spielTyp) {
 			case 1:
 				System.out.print("Essens Auswahl: ");
@@ -39,6 +42,7 @@ public class Starter {
 				// Zufälliges essen
 				break;
 			case 4:
+				functions.essenSpiel();
 				// Falls eine Spiel gestartet werden soll mehrere Produkte wählen
 				break;
 			case 5:

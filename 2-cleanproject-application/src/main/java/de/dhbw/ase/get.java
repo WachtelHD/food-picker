@@ -9,11 +9,14 @@ import org.json.JSONObject;
 
 public class get {
 
+    public get() {
+        
+    }
     public static void main(String[] args) {
        
     }
 
-    public void getRandomFood(){
+    public JSONObject getRandomFood(){
         String APIKey = "1";
 
         try {
@@ -28,7 +31,9 @@ public class get {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
                     while ((strCurrentLine = br.readLine()) != null) {
-                        System.out.println(strCurrentLine);
+                        // System.out.println(strCurrentLine);
+                        JSONObject zufälligesEssenJSON = new JSONObject(strCurrentLine);
+                        return zufälligesEssenJSON;
                     }
             } else {
                 br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
@@ -40,6 +45,7 @@ public class get {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     public void getProductRange(String essensRichtung){
@@ -57,7 +63,6 @@ public class get {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
                     while ((strCurrentLine = br.readLine()) != null) {
-                        
                         System.out.println(strCurrentLine);
                         JSONObject json = new JSONObject(strCurrentLine);
                         System.out.println(""); 
