@@ -57,6 +57,7 @@ public class get {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
                     while ((strCurrentLine = br.readLine()) != null) {
+                        
                         System.out.println(strCurrentLine);
                         JSONObject json = new JSONObject(strCurrentLine);
                         System.out.println(""); 
