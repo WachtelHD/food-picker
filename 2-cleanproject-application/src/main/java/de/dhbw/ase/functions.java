@@ -27,22 +27,33 @@ public class functions {
         for(int i = 0; i <= 10; i++) {
             JSONObject zufälligesEssen = get.getRandomFood();
             mealArray.add(zufälligesEssen);
-            JSONArray meals = zufälligesEssen.getJSONArray("meals");
-            zufälligesEssen = meals.getJSONObject(0);
-            System.out.println(""); 
-            System.out.println(zufälligesEssen.getString("strMeal")); 
         }
-        for(int i = 0; i <= 10; i++) {
-            // JSONArray meals = zufälligesEssen.getJSONArray("meals");
-            // zufälligesEssen = meals.getJSONObject(0);
-            // System.out.println(""); 
-            // System.out.println(zufälligesEssen.getString("strMeal")); 
-            // Integer wahl = in.nextInt();
+        while(true) {
+            System.out.print("Essen 1: "); 
+            System.out.println(getEssensName(mealArray.get(0))); 
+            System.out.print("Essen 2: "); 
+            System.out.println(getEssensName(mealArray.get(1))); 
+            System.out.print("Wahl: "); 
+            Integer wahl = in.nextInt();
+            if(wahl == 1){
+                mealArray.remove(1);
+            } else if( wahl == 2) {
+                mealArray.remove(0);
+            } else {
+                break;
+                //TODO: catch wrong user input    
+            }
+            System.out.println(i);
+            System.out.println(mealArray.size());
 
         }
         
     } 
 
-    // public name
+    private String getEssensName(JSONObject essenObjekt){
+        JSONArray meals = essenObjekt.getJSONArray("meals");
+        JSONObject essen = meals.getJSONObject(0);
+        return essen.getString("strMeal");
+    }
 
 }
