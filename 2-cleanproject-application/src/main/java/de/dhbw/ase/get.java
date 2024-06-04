@@ -42,11 +42,11 @@ public class get {
         }
     }
 
-    public void getProductRange(){
+    public void getProductRange(String essensRichtung){
         String APIKey = "1";
 
         try {
-            URL url = new URL("https://www.themealdb.com/api/json/v1/1/random.php");
+            URL url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + essensRichtung);
 
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestProperty("accept", "application/json");
@@ -82,6 +82,7 @@ public class get {
     }
 
     public void getProductInfo(String params){
+        System.out.println("test");
         String APIKey = "3kTkxnTFVv/5fW3/lKu70A==fHOzKx39l17N3X0C";
 
 

@@ -24,12 +24,14 @@ public class Starter {
 		switch (spielTyp) {
 			case 1:
 				System.out.print("Essens Auswahl: ");
-				String essensTyp = in.nextLine();
+				String essensTyp = in.next();
 				get.getProductInfo(essensTyp);
 				// Falls infos über Spezifisches Produkt gefragt sind diese ausgeben
 				break;
 			case 2:
-				get.getProductRange();
+				System.out.print("Essens Richtung: ");
+				String essensRichtung = in.next();
+				get.getProductRange(essensRichtung);
 				// Falls gerichte für eine Richtung gewünscht sind diese ausgeben
 				break;
 			case 3:
