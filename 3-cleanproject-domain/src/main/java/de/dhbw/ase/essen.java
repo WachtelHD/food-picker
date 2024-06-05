@@ -35,4 +35,20 @@ public class essen {
         this.naehrwerte = naehrwerte;
     }
 
+    @Override
+    public String toString(){
+        if (this.rezept != null){
+            return "Infos:\n" + 
+            "Name: " + this.name  + "\n" + 
+            this.rezept.toString() + "\n"+ 
+            this.naehrwerte.toString();
+        }
+        else{
+            return "Infos:\n" + 
+            "Name: " + this.name + "\n" + 
+            this.naehrwerte.toString(); 
+        }
+        
+    }
+
 }

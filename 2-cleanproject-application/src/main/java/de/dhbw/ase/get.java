@@ -1,11 +1,11 @@
 package de.dhbw.ase;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONObject;
-
 public class get {
 
     public get() {
@@ -100,7 +100,15 @@ public class get {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
                     while ((strCurrentLine = br.readLine()) != null) {
-                        System.out.println(strCurrentLine);
+
+                        JSONObject obj = new JSONObject(strCurrentLine.replace("[", "").replace("]", ""));
+                        
+                        energie energie = new energie(obj.getDouble("calories"), 0);
+                        fett fett = new fett(obj.getDouble("fat_total_g"),obj.getDouble("fat_saturated_g"), 0, 0);
+                        kohlenhydrate kohlenhydrate = new kohlenhydrate(obj.getDouble("carbohydrates_total_g"), obj.getDouble("sugar_g"));
+                        naehrwerte Werte = new naehrwerte(energie, fett, kohlenhydrate, obj.getDouble("potassium_mg"), obj.getDouble("sugar_g"));
+                        essen Essen = new essen(obj.get("name").toString(), null, Werte);
+                        System.out.println(Essen.toString());
                     }
             } else {
                 br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
@@ -112,6 +120,8 @@ public class get {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
     }
 
 }

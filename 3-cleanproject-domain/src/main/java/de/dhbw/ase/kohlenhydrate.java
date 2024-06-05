@@ -25,5 +25,12 @@ public class kohlenhydrate {
     public void setZucker(double zucker) {
         this.zucker = zucker;
     }
+
+    @Override
+    public String toString(){
+        return  "Kohlenhydrate:\n" +
+                "Insgesamt: " + this.insgesamt + "\n" + 
+                "Zucker: " + this.zucker + "\n";
+    }
 }
 

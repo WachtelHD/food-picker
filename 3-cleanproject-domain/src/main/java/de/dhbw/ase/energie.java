@@ -25,5 +25,12 @@ public class energie {
     public void setkJ(double kJ) {
         this.kJ = kJ;
     }
+
+    @Override
+    public String toString(){
+        return  "Energie:\n" +
+                "Kcal: " + this.kcal + "\n" + 
+                "KJ: " + this.kJ + "\n";
+    }
 }
 

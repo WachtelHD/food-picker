@@ -4,13 +4,13 @@ public class fett {
 
     private double insgesamt;
     private double gesättigt;
-    private double ungesätigt;
+    private double ungesättigt;
     private double mehrfachUngesättigt;
 
-    public fett(double insgesamt, double gesättigt, double ungesätigt, double mehrfachUngesättigt) {
+    public fett(double insgesamt, double gesättigt, double ungesättigt, double mehrfachUngesättigt) {
         this.insgesamt = insgesamt;
         this.gesättigt = gesättigt;
-        this.ungesätigt = ungesätigt;
+        this.ungesättigt = ungesättigt;
         this.mehrfachUngesättigt = mehrfachUngesättigt;
     }
 
@@ -30,12 +30,12 @@ public class fett {
         this.gesättigt = gesättigt;
     }
 
-    public double getUngesätigt() {
-        return ungesätigt;
+    public double getungesättigt() {
+        return ungesättigt;
     }
 
-    public void setUngesätigt(double ungesätigt) {
-        this.ungesätigt = ungesätigt;
+    public void setungesättigt(double ungesättigt) {
+        this.ungesättigt = ungesättigt;
     }
 
     public double getMehrfachUngesättigt() {
@@ -44,6 +44,15 @@ public class fett {
 
     public void setMehrfachUngesättigt(double mehrfachUngesättigt) {
         this.mehrfachUngesättigt = mehrfachUngesättigt;
+    }
+
+    @Override
+    public String toString(){
+        return  "Fett:\n" +
+                "Insgesamt: " + this.insgesamt + "\n" +
+                "Gesättigt: " + this.gesättigt + "\n" +
+                "Ungesättigt: " + this.ungesättigt + "\n" +
+                "Mehrfach ungesättigt: " + this.mehrfachUngesättigt + "\n";
     }
 }
 

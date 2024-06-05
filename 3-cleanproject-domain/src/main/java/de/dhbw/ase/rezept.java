@@ -42,11 +42,10 @@ public class rezept {
     // toString method to represent Recipe as a string
     @Override
     public String toString() {
-        return "Recipe{" +
-                "title='" + title + '\'' +
-                ", ingredients=" + ingredients +
-                ", instructions=" + instructions +
-                '}';
+        return "Rezept:\n" + 
+        "Name: " + this.title + "\n" + 
+        "Zutaten: " + this.ingredients + "\n" +
+        "Anweisungen: " + this.instructions;
     }
 }
 

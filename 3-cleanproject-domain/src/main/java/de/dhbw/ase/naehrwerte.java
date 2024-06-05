@@ -55,4 +55,14 @@ public class naehrwerte {
     public void setSalz(double salz) {
         this.salz = salz;
     }
+
+    @Override
+    public String toString(){
+        return "Nährwerte:\n" + 
+        this.energie.toString() + "\n" +
+        this.fett.toString() + "\n" +
+        this.kohlenhydrate.toString() + "\n" +
+        "Eiweis: " + this.eiweis + "\n" +
+        "Salz: " + this.salz + "\n";
+    }
 }
