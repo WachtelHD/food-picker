@@ -7,9 +7,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>3−cleanproject−domain</module>
-		<module>2−cleanproject−application</module>
-		<module>1−cleanproject−adapters</module>
+		<module>3-cleanproject-domain</module>
+		<module>2-cleanproject-application</module>
+		<module>1-cleanproject-adapters</module>
 		<module>0-cleanproject-plugin-database</module>
 		<module>0-cleanproject-plugin-choice-models</module>
 		<module>0-cleanproject-plugin-main</module>

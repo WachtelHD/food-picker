@@ -5,7 +5,7 @@
     <artifactId>x-cleanproject</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>0-cleanproject-plugin-choice-models</artifactId>
+  <artifactId>0-cleanproject-plugin-main</artifactId>
   <dependencies>
   	<dependency>
   		<artifactId>1-cleanproject-adapters</artifactId>
@@ -13,11 +13,17 @@
   		<version>0.0.1-SNAPSHOT</version>
   		<scope>compile</scope>
   	</dependency>
-  	<!-- <dependency>
+	<dependency>
+  		<artifactId>2-cleanproject-application</artifactId>
+  		<groupId>de.dhbw.ase</groupId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
   		<artifactId>0-cleanproject-plugin-choice-models</artifactId>
   		<groupId>de.dhbw.ase</groupId>
   		<version>0.0.1-SNAPSHOT</version>
   		<scope>compile</scope>
-  	</dependency> -->
+  	</dependency>
   </dependencies>
 </project>
