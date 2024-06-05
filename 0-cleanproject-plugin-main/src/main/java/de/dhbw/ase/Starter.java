@@ -26,10 +26,14 @@ public class Starter {
 
 		switch (spielTyp) {
 			case 1:
-				System.out.print("Essens Auswahl: ");
-				String essensTyp = in.next();
-				get.getProductInfo(essensTyp);
-				// Falls infos über Spezifisches Produkt gefragt sind diese ausgeben
+				System.out.println("Essens Auswahl: ");
+				if (in.hasNext()) {
+					String essensTyp = in.next() + in.nextLine();
+					essensTyp = essensTyp.replace(" ", "+");
+					System.out.println(essensTyp);
+					get.getProductInfo(essensTyp);
+				}
+				
 				break;
 			case 2:
 				System.out.print("Essens Richtung: ");

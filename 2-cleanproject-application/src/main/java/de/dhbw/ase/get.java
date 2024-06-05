@@ -65,16 +65,16 @@ public class get {
             if (connection.getResponseCode() == 200) {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
-                    while ((strCurrentLine = br.readLine()) != null) {
-                        JSONObject essenJSON = new JSONObject(strCurrentLine);
-                        return essenJSON;
-                    }
+                while ((strCurrentLine = br.readLine()) != null) {
+                    JSONObject essenJSON = new JSONObject(strCurrentLine);
+                    return essenJSON;
+                }
             } else {
                 br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
                 String strCurrentLine;
-                    while ((strCurrentLine = br.readLine()) != null) {
-                        System.out.println(strCurrentLine);
-                    }
+                while ((strCurrentLine = br.readLine()) != null) {
+                    System.out.println(strCurrentLine);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +83,6 @@ public class get {
     }
 
     public void getProductInfo(String params){
-        System.out.println("test");
         String APIKey = "3kTkxnTFVv/5fW3/lKu70A==fHOzKx39l17N3X0C";
 
 
