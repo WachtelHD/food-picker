@@ -46,6 +46,8 @@ public class Starter {
 				// Falls eine Spiel gestartet werden soll mehrere Produkte wählen
 				break;
 			case 5:
+				String essensRichtung2 = in.next();
+				functions.essenSpiel(essensRichtung2);
 				// Spiel für Produkte in bestimmter Richtung
 				break;
 			default:
