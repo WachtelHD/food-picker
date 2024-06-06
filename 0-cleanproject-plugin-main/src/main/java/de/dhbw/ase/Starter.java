@@ -9,10 +9,6 @@ public class Starter {
 		get get = new get();
 		functions functions = new functions();
 
-		JsonMapper json = new JsonMapper();
-
-		json.generiereEssenInstanz("52772");
-		
 		Integer spielTyp = 0;
 		System.out.println("Hallo, was kann ich für dich tun");
 		System.out.println("1 - Infos zu einem spezifischen Produkt ausgeben");

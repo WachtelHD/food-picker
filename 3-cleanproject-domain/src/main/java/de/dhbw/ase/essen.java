@@ -4,11 +4,13 @@ public class essen {
     private String name;
     private rezept rezept;
     private naehrwerte naehrwerte;
+    private String bild;
     
-    public essen(String name, rezept rezept, naehrwerte naehrwerte) {
+    public essen(String name, rezept rezept, naehrwerte naehrwerte, String bild) {
         this.name = name;
         this.rezept = rezept;
         this.naehrwerte = naehrwerte;
+        this.bild = bild;
     }
 
     public String getName() {
@@ -33,6 +35,14 @@ public class essen {
 
     public void setNaehrwerte(naehrwerte naehrwerte) {
         this.naehrwerte = naehrwerte;
+    }
+
+    public String getBild() {
+        return bild;
+    }
+
+    public void setNaehrwerte(String bild) {
+        this.bild = bild;
     }
 
     @Override

@@ -17,9 +17,15 @@ public class JsonMapper {
 
         String essenName = essenJson.getString("strMeal");
 
+        String essenBild = essenJson.getString("strMealThumb");
+
         String essenAnfrage = essenName.replace(" ", "+");
-        
+
+        System.out.println(essenAnfrage);
+
         JSONArray nährwertArray = get.getProductInfo(essenAnfrage);
+
+        System.out.println(nährwertArray.toString());
 
         List<rezeptZutat> zutaten = new ArrayList<rezeptZutat>();
 
@@ -30,24 +36,24 @@ public class JsonMapper {
             zutaten.add(
                 new rezeptZutat(essenJson.getString("strIngredient" + i), essenJson.getString("strMeasure" + i))
             );
-
         }
 
-        rezept rezept = new rezept(essenName,zutaten,essenJson.getString("strInstructions"),essenJson.getString("strYoutube"));
+        rezept rezept = new rezept(zutaten,essenJson.getString("strInstructions"),essenJson.getString("strYoutube"));
 
         //generierung der einzelnen Nährwertetabellen
+
+        essen Essen = new essen(essenName, rezept, null, essenBild);
 
         for(int i = 0; i < nährwertArray.length(); i++) {
             JSONObject obj = nährwertArray.getJSONObject(i);
             energie energie = new energie(obj.getDouble("calories"), 0);
             fett fett = new fett(obj.getDouble("fat_total_g"),obj.getDouble("fat_saturated_g"), 0, 0);
             kohlenhydrate kohlenhydrate = new kohlenhydrate(obj.getDouble("carbohydrates_total_g"), obj.getDouble("sugar_g"));
-            naehrwerte Werte = new naehrwerte(energie, fett, kohlenhydrate, obj.getDouble("protein_g"), obj.getDouble("sugar_g")); //change suger -> salt
-            essen Essen = new essen(obj.get("name").toString(), rezept, Werte);
-            System.out.println(Essen.toString());
+            naehrwerte werte = new naehrwerte(energie, fett, kohlenhydrate, obj.getDouble("protein_g"), obj.getDouble("sugar_g")); //change suger -> salt
+            Essen = new essen(obj.getString("name"), rezept, werte, essenBild);
         }
 
-        return new essen(essenId, null, null);
+        return Essen;
     }
 
 }

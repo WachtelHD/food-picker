@@ -15,6 +15,7 @@ public class functions {
 
     get get = new get();
     Scanner in = new Scanner(System.in);
+    JsonMapper json = new JsonMapper();
 
     public void essenSpiel(){
 
@@ -35,7 +36,6 @@ public class functions {
             System.out.print("Wahl: "); 
             Integer wahl = in.nextInt();
             if(mealArray.size() == 2){
-                System.out.println("Wahl: " + mealArray.get(0));
                 break;
             }
             if(wahl == 1){
@@ -48,7 +48,15 @@ public class functions {
             }
         }
 
-        this.essenInformationen(mealArray.get(0));
+        System.out.println(mealArray.get(0));
+
+        String essenId = this.getEssensId(mealArray.get(0));
+
+        System.out.println(essenId);
+
+        essen essen = json.generiereEssenInstanz(essenId);
+
+        this.essenInformationen(essen);
     } 
 
     public void essenSpiel(String essensRichtung){
@@ -96,46 +104,58 @@ public class functions {
             }
         }
 
-        this.essenInformationen(mealArray.get(0));
+        // this.essenInformationen(mealArray.get(0));
         
     } 
 
-    private void essenInformationen(JSONObject essen) {
-        System.out.println("Willst du weitere Informationen über das Essen?");
-		System.out.println("1 - Infos zu den Nährwerten");
-		System.out.println("2 - Infos zu der Zubereitung");
-		System.out.println("3 - Infos zu den Zutaten");
-		System.out.println("4 - Bild falls verfügbar"); //?
-		System.out.println("5 - Wo kann man bestellen"); //?
+    private void essenInformationen(essen essen) {
+        boolean ende = false;
 
-		System.out.print("Auswahl: ");
+        while(!ende){
+            System.out.println("Willst du weitere Informationen über das Essen?");
+            System.out.println("1 - Infos zu den Nährwerten");
+            System.out.println("2 - Infos zu der Zubereitung");
+            System.out.println("3 - Infos zu den Zutaten");
+            System.out.println("4 - Vollständige Informationen");
+            System.out.println("5 - Bild falls verfügbar");
+            System.out.println("6 - Beenden");
 
-		Integer wahl = in.nextInt();
+            System.out.print("Auswahl: ");
 
-        switch (wahl) {
-			case 1:
-                get.getProductInfo(essen.getString("strMeal"));
-                // Infos zu Nährwerten
-				break;
-			case 2:
-				// Infos zu Zubereitung
-				break;
-			case 3:
-				// Infos zu den Zutaten
-				break;
-			case 4:
-				// Bild
-				break;
-			case 5:
-				// bestellung
-				break;
-			default:
-				//TODO: change error
-				System.out.println("Es ist ein fehler aufgetreten");
-				break;
-		}
+            Integer wahl = in.nextInt();
 
-
+            switch (wahl) {
+                case 1:
+                    //TODO: Nährwerte können nicht das genau gericht beschreiben -> extra name?
+                    System.out.println(essen.getNaehrwerte().toString());
+                    // Infos zu Nährwerten
+                    break;
+                case 2:
+                    System.out.println(essen.getRezept().toString());
+                    // Infos zu Zubereitung
+                    break;
+                case 3:
+                    System.out.println(essen.getRezept().getYoutube());
+                    // Infos zu den Zutaten -> potentiell nährwerte für diese ausgeben.
+                    break;
+                case 4:
+                    System.out.println(essen.toString());
+                    // Bild
+                    break;
+                case 5:
+                    System.out.println(essen.getBild());
+                    // bestellung
+                    break;
+                case 6:
+                    ende = true;
+                    // beenden
+                    break;
+                default:
+                    //TODO: change error
+                    System.out.println("Es ist ein fehler aufgetreten");
+                    break;
+            }
+        }
     }
 
     private String getEssensName(JSONObject essenObjekt){
@@ -144,4 +164,9 @@ public class functions {
         return essen.getString("strMeal");
     }
 
+    private String getEssensId(JSONObject essenObjekt){
+        JSONArray meals = essenObjekt.getJSONArray("meals");
+        JSONObject essen = meals.getJSONObject(0);
+        return essen.getString("idMeal");
+    }
 }

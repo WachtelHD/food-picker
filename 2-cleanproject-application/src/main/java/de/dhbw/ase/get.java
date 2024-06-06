@@ -135,10 +135,10 @@ public class get {
                 br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String strCurrentLine;
                     while ((strCurrentLine = br.readLine()) != null) {
+                        //TODO: remove print
+                        System.out.print(strCurrentLine);
 
                         JSONArray obj = new JSONArray(strCurrentLine);
-                        System.out.println(strCurrentLine);
-                        System.out.println(obj);
 
                         return obj;
 
