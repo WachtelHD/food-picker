@@ -5,13 +5,15 @@ import java.util.List;
 public class rezept {
     private String title;
     private List<rezeptZutat> ingredients;
-    private List<String> instructions;
+    private String instructions;
+    private String youTube;
 
     // Constructor
-    public rezept(String title, List<rezeptZutat> ingredients, List<String> instructions) {
+    public rezept(String title, List<rezeptZutat> ingredients, String instruction, String youTube) {
         this.title = title;
         this.ingredients = ingredients;
         this.instructions = instructions;
+        this.youTube = youTube;
     }
 
     // Getters and setters
@@ -31,12 +33,20 @@ public class rezept {
         this.ingredients = ingredients;
     }
 
-    public List<String> getInstructions() {
+    public String getInstructions() {
         return instructions;
     }
 
-    public void setInstructions(List<String> instructions) {
+    public void setInstructions(String instructions) {
         this.instructions = instructions;
+    }
+
+    public String getYoutube() {
+        return instructions;
+    }
+
+    public void setYoutube(String youTube) {
+        this.youTube = youTube;
     }
 
     // toString method to represent Recipe as a string

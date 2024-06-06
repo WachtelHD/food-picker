@@ -30,6 +30,6 @@ public class rezeptZutat {
     // toString method to represent RecipeIngredient as a string
     @Override
     public String toString() {
-        return amount + " " + name;
+        return name + " " + amount;
     }
 }
