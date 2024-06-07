@@ -36,6 +36,11 @@ public class basisEssenInfo {
         this.essenBild = essenBild;
     }
 
-    
-
+    @Override
+    public String toString() {
+        return "Essen:" + this.essen + "\n" + 
+        "Bild: " + this.essenBild + "\n" +
+        "--------------------------------------------------------------------";
+    }
 }
+

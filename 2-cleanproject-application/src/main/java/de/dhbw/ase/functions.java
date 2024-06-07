@@ -24,6 +24,7 @@ public class functions {
         JSONObject essenObjekt = get.getEssenÜberName(essensTyp);
         String essenId = this.getEssensId(essenObjekt);
 
+        // TODO: wieder hinzufügen -> APi calls limitiert
         // essen essenInstanz = json.generiereEssenInstanz(essenId);
         // this.essenInformationen(essenInstanz);
     }
@@ -40,22 +41,23 @@ public class functions {
             System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
 		    System.out.println("2 - Die einzelnen Kategorien Anzeigen");
             System.out.println("3 - Kategorie Auswählen");
-            Integer wahl = in.nextInt();
+            System.out.print("Wahl: ");
+            String wahl = in.next();
 
             switch (wahl) {
-                case 1:
+                case "1":
                     //Detailierte Informationen über Kategorien ausgeben
                     for(essenKategorie kategorie : essenkat){
                         System.out.println(kategorie.toString());
                     }
                     break;
-                case 2:
+                case "2":
                     //Kategorien ausgeben
                     for(essenKategorie kategorie : essenkat){
                         System.out.println(kategorie.getKategorie());
                     }
                     break;
-                case 3:
+                case "3":
                     //Springe zur Auswahl
                     amWählen = false;
                     break;
@@ -78,8 +80,30 @@ public class functions {
         }
 
         amWählen = true;
-        for(basisEssenInfo info: essenBasisInfoArray){
-            System.out.println(info.getEssen());
+
+        while(amWählen){
+            System.out.println("Willst du Informationen über die verfügbaren Optionen?");
+            System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
+		    System.out.println("2 - Zufällige Option ausgeben");
+            System.out.print("Wahl: ");
+            String wahl = in.next();
+
+            switch (wahl) {
+				case "1":
+                    for(basisEssenInfo info: essenBasisInfoArray){
+                        System.out.println(info.toString());
+                    }
+                    break;
+				case "2":
+                    int randomNum = (int)(Math.random() * (essenBasisInfoArray.size() + 1));
+                    basisEssenInfo option = essenBasisInfoArray.get(randomNum);
+                    System.out.println(option.toString());
+                    break;
+                default:
+                    System.out.println("Bitte wähle eine Valide Option");
+                    amWählen = false;
+                    break;
+            }
         }
 
         // randomize selection
