@@ -9,13 +9,87 @@ import org.json.JSONObject;
 
 public class functions {
 
+    get get = new get();
+    Scanner in = new Scanner(System.in);
+    JsonMapper json = new JsonMapper();
+
     public functions() {
 
     }
 
-    get get = new get();
-    Scanner in = new Scanner(System.in);
-    JsonMapper json = new JsonMapper();
+    public void essenAusgabe(){
+        System.out.print("Essens Auswahl: ");
+        //check return for rice as the request isnt just rice
+        String essensTyp = in.next();
+        JSONObject essenObjekt = get.getEssenÜberName(essensTyp);
+        String essenId = this.getEssensId(essenObjekt);
+
+        // essen essenInstanz = json.generiereEssenInstanz(essenId);
+        // this.essenInformationen(essenInstanz);
+    }
+
+    public void essenInSpezifischerRichtung(){
+
+        List<essenKategorie> essenkat = json.generiereKategorieListe();
+        List<basisEssenInfo> essenBasisInfoArray = new ArrayList<basisEssenInfo>();
+
+        boolean amWählen = true;
+        
+        while(amWählen){
+            System.out.println("Willst du Informationen über die verfügbaren Kategorien?");
+            System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
+		    System.out.println("2 - Die einzelnen Kategorien Anzeigen");
+            System.out.println("3 - Kategorie Auswählen");
+            Integer wahl = in.nextInt();
+
+            switch (wahl) {
+                case 1:
+                    //Detailierte Informationen über Kategorien ausgeben
+                    for(essenKategorie kategorie : essenkat){
+                        System.out.println(kategorie.toString());
+                    }
+                    break;
+                case 2:
+                    //Kategorien ausgeben
+                    for(essenKategorie kategorie : essenkat){
+                        System.out.println(kategorie.getKategorie());
+                    }
+                    break;
+                case 3:
+                    //Springe zur Auswahl
+                    amWählen = false;
+                    break;
+                default:
+                    System.out.println("Bitte wählen sie eine valide Option aus");
+            }
+        }
+
+        amWählen = true;
+
+        while(amWählen){
+            System.out.print("Wahl: ");
+            String wahl = in.next();
+            try{
+                essenBasisInfoArray = json.generiereBasisEssenInformationListe(wahl);
+                amWählen = false;
+            } catch (Exception e) {
+                System.out.println("Bitte wähle eine Valide Option");
+            }
+        }
+
+        amWählen = true;
+        for(basisEssenInfo info: essenBasisInfoArray){
+            System.out.println(info.getEssen());
+        }
+
+        // randomize selection
+        // System.out.println(essenJson);
+        
+        // String essenId = this.getEssensId(essenJson);
+        
+        // essen essenInstanz = json.generiereEssenInstanz(essenId);
+        // this.essenInformationen(essenInstanz);
+    }
 
     public void essenSpiel(){
 
@@ -169,4 +243,5 @@ public class functions {
         JSONObject essen = meals.getJSONObject(0);
         return essen.getString("idMeal");
     }
+
 }

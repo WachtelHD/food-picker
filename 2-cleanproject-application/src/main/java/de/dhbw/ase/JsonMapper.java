@@ -8,9 +8,57 @@ import org.json.JSONObject;
 
 public class JsonMapper {
 
-    public essen generiereEssenInstanz(String essenId){
-        get get = new get();
+    get get = new get();
 
+    //generiert eine Kategorien Liste 
+
+    public List<basisEssenInfo> generiereBasisEssenInformationListe(String wahl){
+
+        JSONObject essenJson = get.getProductRange(wahl);
+
+        List<basisEssenInfo> essenBasisInfoArray = new ArrayList<basisEssenInfo>();
+
+        JSONArray essenArray = essenJson.getJSONArray("meals");
+
+        for(int i = 0; i < essenArray.length(); i++) {
+            JSONObject kategorieObjekt = essenArray.getJSONObject(i);
+
+            String essenId = kategorieObjekt.getString("idMeal");
+            String essenString = kategorieObjekt.getString("strMeal");
+            String essenBild = kategorieObjekt.getString("strMealThumb");
+            
+            basisEssenInfo essen = new basisEssenInfo(essenId,essenString,essenBild);
+            essenBasisInfoArray.add(essen);
+        }
+
+        return essenBasisInfoArray;
+    }
+
+    public List<essenKategorie> generiereKategorieListe(){
+        JSONObject essenKategorie = get.getEssenKategorien();
+
+        List<essenKategorie> essenKategorieArray = new ArrayList<essenKategorie>();
+
+        JSONArray kategorieArray = essenKategorie.getJSONArray("categories");
+
+        for(int i = 0; i < kategorieArray.length(); i++) {
+            JSONObject kategorieObjekt = kategorieArray.getJSONObject(i);
+
+            String kategorieId = kategorieObjekt.getString("idCategory");
+            String kategorieString = kategorieObjekt.getString("strCategory");
+            String kategorieBild = kategorieObjekt.getString("strCategoryThumb");
+            String kategorieBeschreibung = kategorieObjekt.getString("strCategoryDescription");
+            
+            essenKategorie kategorie = new essenKategorie(kategorieId,kategorieString,kategorieBild,kategorieBeschreibung);
+            essenKategorieArray.add(kategorie);
+        }
+
+        return essenKategorieArray;
+    }
+
+    //generiert eine essenInstanz abhängig von der essenId
+
+    public essen generiereEssenInstanz(String essenId){
         JSONObject essenJsonAntwort = get.getEssenÜberId(essenId);
 
         JSONObject essenJson = essenJsonAntwort.getJSONArray("meals").getJSONObject(0);

@@ -47,6 +47,70 @@ public class get {
         return null;
     }
 
+    public JSONObject getEssenÜberName(String essenName){
+        String APIKey = "1";
+
+        try {
+            URL url = new URL("https://www.themealdb.com/api/json/v1/1/search.php?s=" + essenName);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("accept", "application/json");
+            connection.setRequestProperty("X-Api-Key", APIKey);
+            
+            BufferedReader br = null;
+            if (connection.getResponseCode() == 200) {
+                br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String strCurrentLine;
+                while ((strCurrentLine = br.readLine()) != null) {
+                    JSONObject essenJSON = new JSONObject(strCurrentLine);
+                    return essenJSON;
+                }
+            } else {
+                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                String strCurrentLine;
+                while ((strCurrentLine = br.readLine()) != null) {
+                    System.out.println(strCurrentLine);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public JSONObject getEssenKategorien(){
+        String APIKey = "1";
+
+        try {
+            URL url = new URL("https://www.themealdb.com/api/json/v1/1/categories.php");
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestProperty("accept", "application/json");
+            connection.setRequestProperty("X-Api-Key", APIKey);
+            
+            BufferedReader br = null;
+            if (connection.getResponseCode() == 200) {
+                br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String strCurrentLine;
+                while ((strCurrentLine = br.readLine()) != null) {
+
+                    JSONObject kategorienJson = new JSONObject(strCurrentLine);
+                    return kategorienJson;
+                    
+                }
+            } else {
+                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+                String strCurrentLine;
+                while ((strCurrentLine = br.readLine()) != null) {
+                    System.out.println(strCurrentLine);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public JSONObject getEssenÜberId(String idString){
         String APIKey = "1";
 
@@ -141,13 +205,6 @@ public class get {
                         JSONArray obj = new JSONArray(strCurrentLine);
 
                         return obj;
-
-                    //     energie energie = new energie(obj.getDouble("calories"), 0);
-                    //     fett fett = new fett(obj.getDouble("fat_total_g"),obj.getDouble("fat_saturated_g"), 0, 0);
-                    //     kohlenhydrate kohlenhydrate = new kohlenhydrate(obj.getDouble("carbohydrates_total_g"), obj.getDouble("sugar_g"));
-                    //     naehrwerte Werte = new naehrwerte(energie, fett, kohlenhydrate, obj.getDouble("potassium_mg"), obj.getDouble("sugar_g"));
-                    //     essen Essen = new essen(obj.get("name").toString(), null, Werte);
-                    //     System.out.println(Essen.toString());
                     }
             } else {
                 br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
