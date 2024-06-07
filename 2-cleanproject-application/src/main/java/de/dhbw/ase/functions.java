@@ -34,6 +34,8 @@ public class functions {
         List<essenKategorie> essenkat = json.generiereKategorieListe();
         List<basisEssenInfo> essenBasisInfoArray = new ArrayList<basisEssenInfo>();
 
+        basisEssenInfo option = null;
+
         boolean amWählen = true;
         
         while(amWählen){
@@ -63,6 +65,7 @@ public class functions {
                     break;
                 default:
                     System.out.println("Bitte wählen sie eine valide Option aus");
+                    break;
             }
         }
 
@@ -85,32 +88,52 @@ public class functions {
             System.out.println("Willst du Informationen über die verfügbaren Optionen?");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
 		    System.out.println("2 - Zufällige Option ausgeben");
+            System.out.println("3 - nähere details zur aktuellen Option");
+            System.out.println("4 - Optionen über essens id anzeigen");
             System.out.print("Wahl: ");
             String wahl = in.next();
 
             switch (wahl) {
 				case "1":
+                    // Ausgabe der Basis essen Informationen der gesammten Kategorie
+                    //TODO: besser auswahl des essens (nicht über id)
                     for(basisEssenInfo info: essenBasisInfoArray){
                         System.out.println(info.toString());
                     }
                     break;
 				case "2":
+                    // Wahl eines zufälligen essens der Kategorie
                     int randomNum = (int)(Math.random() * (essenBasisInfoArray.size() + 1));
-                    basisEssenInfo option = essenBasisInfoArray.get(randomNum);
+                    option = essenBasisInfoArray.get(randomNum);
                     System.out.println(option.toString());
+                    break;
+                case "3":
+                    // Fortfahren zu details des essens
+                    essen essen = json.generiereEssenInstanz(option.getId());
+                    this.essenInformationen(essen);
+                    amWählen = false;
+                    break;
+                case "4":
+                    // Details des essens über id anzeigen
+                    System.out.print("Id: ");
+                    String id = in.next();
+                    essen essenÜberId = json.generiereEssenInstanz(id);
+                    this.essenInformationen(essenÜberId);
+                    amWählen = false;
                     break;
                 default:
                     System.out.println("Bitte wähle eine Valide Option");
-                    amWählen = false;
                     break;
             }
         }
+    }
 
-        // randomize selection
-        // System.out.println(essenJson);
-        
-        // String essenId = this.getEssensId(essenJson);
-        
+    public void zufälligesEssen(){
+        JSONObject zufälligesEssenJson = get.getRandomFood();
+
+        String essenId = this.getEssensId(zufälligesEssenJson);
+
+        // TODO: wieder hinzufügen -> APi calls limitiert
         // essen essenInstanz = json.generiereEssenInstanz(essenId);
         // this.essenInformationen(essenInstanz);
     }
@@ -149,8 +172,6 @@ public class functions {
         System.out.println(mealArray.get(0));
 
         String essenId = this.getEssensId(mealArray.get(0));
-
-        System.out.println(essenId);
 
         essen essen = json.generiereEssenInstanz(essenId);
 
@@ -207,9 +228,9 @@ public class functions {
     } 
 
     private void essenInformationen(essen essen) {
-        boolean ende = false;
+        boolean amWählen = true;
 
-        while(!ende){
+        while(amWählen){
             System.out.println("Willst du weitere Informationen über das Essen?");
             System.out.println("1 - Infos zu den Nährwerten");
             System.out.println("2 - Infos zu der Zubereitung");
@@ -220,37 +241,37 @@ public class functions {
 
             System.out.print("Auswahl: ");
 
-            Integer wahl = in.nextInt();
+            String wahl = in.next();
 
             switch (wahl) {
-                case 1:
+                case "1":
                     //TODO: Nährwerte können nicht das genau gericht beschreiben -> extra name?
                     System.out.println(essen.getNaehrwerte().toString());
                     // Infos zu Nährwerten
                     break;
-                case 2:
+                case "2":
                     System.out.println(essen.getRezept().toString());
                     // Infos zu Zubereitung
                     break;
-                case 3:
+                case "3":
                     System.out.println(essen.getRezept().getYoutube());
                     // Infos zu den Zutaten -> potentiell nährwerte für diese ausgeben.
                     break;
-                case 4:
+                case "4":
                     System.out.println(essen.toString());
                     // Bild
                     break;
-                case 5:
+                case "5":
                     System.out.println(essen.getBild());
                     // bestellung
                     break;
-                case 6:
-                    ende = true;
+                case "6":
+                    amWählen = false;
                     // beenden
                     break;
                 default:
                     //TODO: change error
-                    System.out.println("Es ist ein fehler aufgetreten");
+                    System.out.println("Bitte wähle eine Valide Option");
                     break;
             }
         }

@@ -41,7 +41,7 @@ public class Starter {
 					amWählen = false;
 					break;
 				case "3":
-					get.getRandomFood();
+					functions.zufälligesEssen();
 					amWählen = false;
 					// Zufälliges essen
 					break;
@@ -51,14 +51,17 @@ public class Starter {
 					// Falls eine Spiel gestartet werden soll mehrere Produkte wählen
 					break;
 				case "5":
-					String essensRichtung2 = in.next();
-					functions.essenSpiel(essensRichtung2);
+					String essensRichtung = in.next();
+					functions.essenSpiel(essensRichtung);
 					amWählen = false;
 					// Spiel für Produkte in bestimmter Richtung
 					break;
 				default:
-					//TODO: change error
-					System.out.println("Bitte wählen sie eine valide Option aus");
+					//TODO: change error6
+					System.out.println("--------------------------------------------------------------------");
+					System.out.println("	   Bitte wählen sie eine valide Option aus");
+					System.out.println("--------------------------------------------------------------------");
+
 					break;
 			}
 		}

@@ -42,8 +42,14 @@ public class rezept {
     // toString method to represent Recipe as a string
     @Override
     public String toString() {
+        String zutaten = "";
+        for(rezeptZutat zutat:this.ingredients){
+            zutaten = zutaten + zutat.toString() + "\n";
+        }
+
         return "Rezept:\n" + 
-        "Zutaten: " + this.ingredients + "\n" +
+        "Zutaten: " + "\n" +
+        zutaten +
         "Anweisungen: " + this.instructions;
     }
 }

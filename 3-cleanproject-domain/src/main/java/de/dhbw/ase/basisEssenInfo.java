@@ -38,7 +38,7 @@ public class basisEssenInfo {
 
     @Override
     public String toString() {
-        return "Essen:" + this.essen + "\n" + 
+        return "Essen (" + this.Id + "):" + this.essen + "\n" + 
         "Bild: " + this.essenBild + "\n" +
         "--------------------------------------------------------------------";
     }
