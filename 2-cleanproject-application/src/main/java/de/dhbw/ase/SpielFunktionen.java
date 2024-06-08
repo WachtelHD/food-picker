@@ -18,7 +18,7 @@ public class SpielFunktionen {
         this.essenService = essenService;
         this.naehrwertService = naehrwertService;
         this.in = new Scanner(System.in);
-        this.json = new JsonMapper();
+        this.json = new JsonMapper(essenService, naehrwertService);
     }
 
     public void essenAusgabe(){
@@ -270,5 +270,4 @@ public class SpielFunktionen {
         JSONObject essen = meals.getJSONObject(0);
         return essen.getString("idMeal");
     }
-
 }
