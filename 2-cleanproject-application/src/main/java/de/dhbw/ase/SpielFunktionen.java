@@ -9,19 +9,22 @@ import org.json.JSONObject;
 
 public class SpielFunktionen {
 
-    GetFunktionen get = new GetFunktionen();
-    Scanner in = new Scanner(System.in);
-    JsonMapper json = new JsonMapper();
+    private final EssenService essenService;
+    private final NaehrwertService naehrwertService;
+    private final Scanner in;
+    private final JsonMapper json; // Angenommen, dass JsonMapper ebenfalls angepasst wurde
 
-    public SpielFunktionen() {
-
+    public SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService) {
+        this.essenService = essenService;
+        this.naehrwertService = naehrwertService;
+        this.in = new Scanner(System.in);
+        this.json = new JsonMapper();
     }
 
     public void essenAusgabe(){
         System.out.print("Essens Auswahl: ");
-        //check return for rice as the request isnt just rice
         String essensTyp = in.next();
-        JSONObject essenObjekt = get.getEssenÜberName(essensTyp);
+        JSONObject essenObjekt = essenService.getEssenÜberName(essensTyp);
         String essenId = this.getEssensId(essenObjekt);
 
         // TODO: wieder hinzufügen -> APi calls limitiert
@@ -32,16 +35,16 @@ public class SpielFunktionen {
     public void essenInSpezifischerRichtung(){
 
         List<essenKategorie> essenkat = json.generiereKategorieListe();
-        List<basisEssenInfo> essenBasisInfoArray = new ArrayList<basisEssenInfo>();
+        List<basisEssenInfo> essenBasisInfoArray = new ArrayList<>();
 
         basisEssenInfo option = null;
 
         boolean amWählen = true;
-        
+
         while(amWählen){
             System.out.println("Möchtest du Informationen über die verfügbaren Kategorien?");
             System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
-		    System.out.println("2 - Die einzelnen Kategorien Anzeigen");
+            System.out.println("2 - Die einzelnen Kategorien Anzeigen");
             System.out.println("3 - Kategorie Auswählen");
             System.out.print("Wahl: ");
             String wahl = in.next();
@@ -87,20 +90,20 @@ public class SpielFunktionen {
         while(amWählen){
             System.out.println("Möchtest du Informationen über die verfügbaren Optionen?");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
-		    System.out.println("2 - Zufällige Option ausgeben");
+            System.out.println("2 - Zufällige Option ausgeben");
             System.out.println("3 - nähere details zur aktuellen Option");
             System.out.println("4 - Optionen über essens id anzeigen");
             System.out.print("Wahl: ");
             String wahl = in.next();
 
             switch (wahl) {
-				case "1":
+                case "1":
                     // Ausgabe der Basis essen Informationen der gesamten Kategorie
                     for (basisEssenInfo info : essenBasisInfoArray) {
                         System.out.println(info.toString());
                     }
                     break;
-				case "2":
+                case "2":
                     // Wahl eines zufälligen essens der Kategorie
                     int randomNum = (int)(Math.random() * (essenBasisInfoArray.size() + 1));
                     option = essenBasisInfoArray.get(randomNum);
@@ -128,8 +131,7 @@ public class SpielFunktionen {
     }
 
     public void zufälligesEssen(){
-        JSONObject zufälligesEssenJson = get.getRandomFood();
-
+        JSONObject zufälligesEssenJson = essenService.getZufälligesEssen();
         String essenId = this.getEssensId(zufälligesEssenJson);
 
         // TODO: wieder hinzufügen -> APi calls limitiert
@@ -137,25 +139,23 @@ public class SpielFunktionen {
         // this.essenInformationen(essenInstanz);
     }
 
-    public void essenSpiel(){
-
-        List<JSONObject> mealArray = new ArrayList<JSONObject>();
-
-        System.out.print("Wie viele Gerichte sollen gewählt werden: "); 
-        Integer anzahl = in.nextInt();
+    public void essenSpiel() {
+        List<JSONObject> mealArray = new ArrayList<>();
+        System.out.print("Wie viele Gerichte sollen gewählt werden: ");
+        int anzahl = in.nextInt();
 
         for(int i = 0; i <= anzahl; i++) {
-            JSONObject zufälligesEssen = get.getRandomFood();
+            JSONObject zufälligesEssen = essenService.getZufälligesEssen();
             mealArray.add(zufälligesEssen);
         }
         while(true) {
-            System.out.print("Essen 1: "); 
-            System.out.println(getEssensName(mealArray.get(0))); 
-            System.out.print("Essen 2: "); 
-            System.out.println(getEssensName(mealArray.get(1))); 
-            System.out.print("Wahl: "); 
-            Integer wahl = in.nextInt();
-            if(mealArray.size() == 2){
+            System.out.print("Essen 1: ");
+            System.out.println(getEssensName(mealArray.get(0)));
+            System.out.print("Essen 2: ");
+            System.out.println(getEssensName(mealArray.get(1)));
+            System.out.print("Wahl: ");
+            int wahl = in.nextInt();
+            if(mealArray.size() == 2) {
                 break;
             }
             if(wahl == 1){
@@ -163,7 +163,7 @@ public class SpielFunktionen {
             } else if( wahl == 2) {
                 mealArray.remove(0);
             } else {
-                System.out.print("Wähle bitte eine Valide Option"); 
+                System.out.print("Wähle bitte eine Valide Option");
                 //TODO: catch wrong user input    
             }
         }
@@ -175,39 +175,25 @@ public class SpielFunktionen {
         essen essen = json.generiereEssenInstanz(essenId);
 
         this.essenInformationen(essen);
-    } 
+    }
 
-    public void essenSpiel(String essensRichtung){
+    public void essenSpiel(String essensRichtung) {
+        JSONObject zufälligesEssen = essenService.getEssenÜberKategorie(essensRichtung);
+        List<JSONObject> mealArray = new ArrayList<>();
+        List<Object> essenArray = zufälligesEssen.getJSONArray("meals").toList();
 
-        JSONObject zufälligesEssen = get.getProductRange(essensRichtung);
-
-        List<JSONObject> mealArray = new ArrayList<JSONObject>();
-
-        List<Object> essenArray = new ArrayList<Object>();
-
-        essenArray = zufälligesEssen.getJSONArray("meals").toList();
-
-        System.out.println(essenArray);
-
-        //TODO: conversion doesnt work how it should -> object to JSONObject 
-
-        for(int i = 0; i <= 10; i++) {
-            Object ess = essenArray.get(i).toString();
-            JSONObject essen = new JSONObject(ess);
-            System.out.println(essenArray.get(i));
-            System.out.println(essen);
+        for(int i = 0; i < 10; i++) {
+            JSONObject essen = new JSONObject(essenArray.get(i).toString());
             mealArray.add(essen);
         }
 
-        System.out.println(mealArray.get(0));
-        
         while(true) {
-            System.out.print("Essen 1: "); 
-            System.out.println(mealArray.get(0).get("strMeal")); 
-            System.out.print("Essen 2: "); 
-            System.out.println(mealArray.get(1).get("strMeal")); 
-            System.out.print("Wahl: "); 
-            Integer wahl = in.nextInt();
+            System.out.print("Essen 1: ");
+            System.out.println(mealArray.get(0).get("strMeal"));
+            System.out.print("Essen 2: ");
+            System.out.println(mealArray.get(1).get("strMeal"));
+            System.out.print("Wahl: ");
+            int wahl = in.nextInt();
             if(mealArray.size() == 2){
                 System.out.println("Wahl: " + mealArray.get(0).get("strMeal"));
                 break;
@@ -217,14 +203,11 @@ public class SpielFunktionen {
             } else if( wahl == 2) {
                 mealArray.remove(0);
             } else {
-                System.out.print("Wähle bitte eine Valide Option"); 
+                System.out.print("Wähle bitte eine Valide Option");
                 //TODO: catch wrong user input    
             }
         }
-
-        // this.essenInformationen(mealArray.get(0));
-        
-    } 
+    }
 
     private void essenInformationen(essen essen) {
         boolean amWählen = true;
