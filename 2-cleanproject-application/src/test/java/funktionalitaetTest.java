@@ -3,13 +3,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import de.dhbw.ase.functions;
+import de.dhbw.ase.GetFunktionen;
 
 public class funktionalitaetTest {
 
     @Test 
     public void testEssenName(){
-        functions funktionen = new functions();
+        GetFunktionen funktionen = new GetFunktionen();
 
         // Korrigierter JSON-String
         String testObjektString = "{\"meals\": [{\"strMeal\": \"foo\"}]}";
@@ -26,7 +26,7 @@ public class funktionalitaetTest {
 
     @Test 
     public void testEssenId(){
-        functions funktionen = new functions();
+        GetFunktionen funktionen = new GetFunktionen();
 
         // Korrigierter JSON-String
         String testObjektString = "{\"meals\": [{\"idMeal\": \"foo\"}]}";

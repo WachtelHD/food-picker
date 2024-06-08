@@ -1,5 +1,7 @@
 package de.dhbw.ase;
 
+import de.dhbw.ase.GetFunktionen.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
