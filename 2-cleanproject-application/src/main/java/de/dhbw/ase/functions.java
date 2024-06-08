@@ -39,7 +39,7 @@ public class functions {
         boolean amWählen = true;
         
         while(amWählen){
-            System.out.println("Willst du Informationen über die verfügbaren Kategorien?");
+            System.out.println("Möchtest du Informationen über die verfügbaren Kategorien?");
             System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
 		    System.out.println("2 - Die einzelnen Kategorien Anzeigen");
             System.out.println("3 - Kategorie Auswählen");
@@ -85,7 +85,7 @@ public class functions {
         amWählen = true;
 
         while(amWählen){
-            System.out.println("Willst du Informationen über die verfügbaren Optionen?");
+            System.out.println("Möchtest du Informationen über die verfügbaren Optionen?");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
 		    System.out.println("2 - Zufällige Option ausgeben");
             System.out.println("3 - nähere details zur aktuellen Option");
@@ -231,7 +231,7 @@ public class functions {
         boolean amWählen = true;
 
         while(amWählen){
-            System.out.println("Willst du weitere Informationen über das Essen?");
+            System.out.println("Möchtest du weitere Informationen über das Essen?");
             System.out.println("1 - Infos zu den Nährwerten");
             System.out.println("2 - Infos zu der Zubereitung");
             System.out.println("3 - Infos zu den Zutaten");
