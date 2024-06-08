@@ -277,13 +277,13 @@ public class SpielFunktionen {
         }
     }
 
-    private String getEssensName(JSONObject essenObjekt){
+    public String getEssensName(JSONObject essenObjekt){
         JSONArray meals = essenObjekt.getJSONArray("meals");
         JSONObject essen = meals.getJSONObject(0);
         return essen.getString("strMeal");
     }
 
-    private String getEssensId(JSONObject essenObjekt){
+    public String getEssensId(JSONObject essenObjekt){
         JSONArray meals = essenObjekt.getJSONArray("meals");
         JSONObject essen = meals.getJSONObject(0);
         return essen.getString("idMeal");
