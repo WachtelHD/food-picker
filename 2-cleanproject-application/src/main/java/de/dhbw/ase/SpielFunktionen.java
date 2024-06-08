@@ -95,9 +95,8 @@ public class SpielFunktionen {
 
             switch (wahl) {
 				case "1":
-                    // Ausgabe der Basis essen Informationen der gesammten Kategorie
-                    //TODO: besser auswahl des essens (nicht über id)
-                    for(basisEssenInfo info: essenBasisInfoArray){
+                    // Ausgabe der Basis essen Informationen der gesamten Kategorie
+                    for (basisEssenInfo info : essenBasisInfoArray) {
                         System.out.println(info.toString());
                     }
                     break;
