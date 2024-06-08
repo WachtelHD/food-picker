@@ -18,7 +18,7 @@ public class funktionalitaetTest {
         JSONObject testObjekt = new JSONObject(testObjektString);
 
         // Aufruf der Methode
-        String essenId = funktionen.getEssensName(testObjekt);
+        String essenId = funktionen.getEssenName(testObjekt);
 
         // Überprüfung des Ergebnisses
         assertEquals("foo", essenId);
@@ -35,7 +35,7 @@ public class funktionalitaetTest {
         JSONObject testObjekt = new JSONObject(testObjektString);
 
         // Aufruf der Methode
-        String essenId = funktionen.getEssensId(testObjekt);
+        String essenId = funktionen.getEssenId(testObjekt);
 
         // Überprüfung des Ergebnisses
         assertEquals("foo", essenId);
