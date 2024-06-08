@@ -4,6 +4,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public interface ApiClient {
-    JSONObject get(String endpoint);
-    JSONArray getArray(String endpoint);
+    JSONObject get(String endpunkt);
+    JSONArray getArray(String endpunkt);
 }

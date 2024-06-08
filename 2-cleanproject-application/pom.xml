@@ -7,6 +7,12 @@
   </parent>
   <artifactId>2-cleanproject-application</artifactId>
   <dependencies>
+  <dependency>
+  		<artifactId>1-cleanproject-adapters</artifactId>
+  		<groupId>de.dhbw.ase</groupId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<scope>compile</scope>
+  	</dependency>
   	<dependency>
   		<artifactId>3-cleanproject-domain</artifactId>
   		<groupId>de.dhbw.ase</groupId>

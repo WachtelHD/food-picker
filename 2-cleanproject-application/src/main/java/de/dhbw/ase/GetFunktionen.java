@@ -116,9 +116,7 @@ public class GetFunktionen {
     public JSONObject getEssenÜberId(String idString){
         String APIKey = "1";
 
-        // www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast -> ingredient
-        // www.themealdb.com/api/json/v1/1/filter.php?a=Canadian -> Area
-        // www.themealdb.com/api/json/v1/1/lookup.php?i=52772 -> meal details by id
+        
 
         try {
             URL url = new URL("https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + idString);
