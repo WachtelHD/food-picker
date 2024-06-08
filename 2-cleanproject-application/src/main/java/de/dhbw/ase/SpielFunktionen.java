@@ -7,13 +7,13 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class functions {
+public class SpielFunktionen {
 
-    get get = new get();
+    GetFunktionen get = new GetFunktionen();
     Scanner in = new Scanner(System.in);
     JsonMapper json = new JsonMapper();
 
-    public functions() {
+    public SpielFunktionen() {
 
     }
 

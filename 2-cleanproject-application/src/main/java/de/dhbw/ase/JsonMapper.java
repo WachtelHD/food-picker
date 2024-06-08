@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 public class JsonMapper {
 
-    get get = new get();
+    GetFunktionen get = new GetFunktionen();
 
     //generiert eine Kategorien Liste 
 

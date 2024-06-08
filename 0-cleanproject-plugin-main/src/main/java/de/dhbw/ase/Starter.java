@@ -7,8 +7,8 @@ public class Starter {
 	// pom.xml überprüfen
 	public static void main(String[] args) {
 		//Init
-		get get = new get();
-		functions functions = new functions();
+		GetFunktionen get = new GetFunktionen();
+		SpielFunktionen functions = new SpielFunktionen();
 		Scanner in = new Scanner(System.in);
 
 		String spielTyp = "";

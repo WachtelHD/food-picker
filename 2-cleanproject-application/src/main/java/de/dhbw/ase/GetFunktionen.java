@@ -6,9 +6,9 @@ import java.net.URL;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-public class get {
+public class GetFunktionen {
 
-    public get() {
+    public GetFunktionen() {
         
     }
     public static void main(String[] args) {
