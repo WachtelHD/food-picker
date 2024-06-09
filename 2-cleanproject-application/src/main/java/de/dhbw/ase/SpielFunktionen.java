@@ -199,7 +199,9 @@ public class SpielFunktionen {
         boolean amWählen = true;
 
         while(amWählen){
-            System.out.println("Möchtest du weitere Informationen über das Essen?");
+            System.out.println("╔══════════════════════════════════════════════════╗");
+            System.out.println("║            Informationen zum Essen               ║");
+            System.out.println("╚══════════════════════════════════════════════════╝");
             System.out.println("1 - Infos zu den Nährwerten");
             System.out.println("2 - Infos zu der Zubereitung");
             System.out.println("3 - Infos zu den Zutaten");
@@ -211,22 +213,37 @@ public class SpielFunktionen {
             switch (wahl) {
                 case "1":
                     //TODO: Nährwerte können nicht das genau gericht beschreiben -> extra name?
+                    System.out.println("╔══════════════════════════════════════════════════╗");
+                    System.out.println("║               Nährwerte                          ║");
+                    System.out.println("╚══════════════════════════════════════════════════╝");
                     System.out.println(essen.getNaehrwerte().toString());
                     // Infos zu Nährwerten
                     break;
                 case "2":
+                    System.out.println("╔══════════════════════════════════════════════════╗");
+                    System.out.println("║               Zubereitung                        ║");
+                    System.out.println("╚══════════════════════════════════════════════════╝");
                     System.out.println(essen.getRezept().toString());
                     // Infos zu Zubereitung
                     break;
                 case "3":
+                    System.out.println("╔══════════════════════════════════════════════════╗");
+                    System.out.println("║               Zutaten                            ║");
+                    System.out.println("╚══════════════════════════════════════════════════╝");
                     System.out.println(essen.getRezept().getYoutube());
                     // Infos zu den Zutaten -> potentiell nährwerte für diese ausgeben.
                     break;
                 case "4":
+                    System.out.println("╔══════════════════════════════════════════════════╗");
+                    System.out.println("║               Vollständige Informationen         ║");
+                    System.out.println("╚══════════════════════════════════════════════════╝");
                     System.out.println(essen.toString());
                     // Bild
                     break;
                 case "5":
+                    System.out.println("╔══════════════════════════════════════════════════╗");
+                    System.out.println("║               Bild                               ║");
+                    System.out.println("╚══════════════════════════════════════════════════╝");
                     System.out.println(essen.getBild());
                     // bestellung
                     break;
