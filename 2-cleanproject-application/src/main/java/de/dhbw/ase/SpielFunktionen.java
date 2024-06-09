@@ -163,7 +163,6 @@ public class SpielFunktionen {
                 mealArray.remove(0);
             } else {
                 System.out.print("Wähle bitte eine Valide Option");
-                //TODO: catch wrong user input    
             }
         }
 
@@ -192,7 +191,6 @@ public class SpielFunktionen {
                 mealArray.remove(0);
             } else {
                 System.out.print("Wähle bitte eine Valide Option");
-                //TODO: catch wrong user input    
             }
         }
 
