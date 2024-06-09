@@ -46,9 +46,19 @@ public class essen {
     }
 
     @Override
-    public String toString() {
-        return String.format("Name: %s\n\nRezept:\n%s\n\nNährwerte:\n%s\n\nBild: %s", 
-                             name, rezept.toString(), naehrwerte.toString(), bild);
+    public String toString(){
+        if (this.rezept != null){
+            return "Infos:\n" + 
+            "Name: " + this.name  + "\n" + 
+            this.rezept.toString() + "\n"+ 
+            this.naehrwerte.toString();
+        }
+        else{
+            return "Infos:\n" + 
+            "Name: " + this.name + "\n" + 
+            this.naehrwerte.toString(); 
+        }
+        
     }
 
 }
