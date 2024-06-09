@@ -20,10 +20,10 @@ public class Starter {
             // Aus-/Eingabe
             System.out.println("Hallo, was kann ich für dich tun");
             System.out.println("1 - Infos zu einem spezifischen Produkt ausgeben");
-            System.out.println("2 - Gerichtsvorschläge einer spezifischen Richtung");
-            System.out.println("3 - Zufälliges Essen");
-            System.out.println("4 - Essensauswahl spiel");
-            System.out.println("5 - Essensauswahl spiel mit spezifischer Richtung");
+            System.out.println("2 - Gerichtsvorschläge einer spezifischen Richtung anzeigen");
+            System.out.println("3 - Zufälliges Essen anzeigen");
+            System.out.println("4 - Essensvorschläge erhalten");
+            System.out.println("5 - Essensvorschlag mit spezifischer Richtung erhalten");
 
             System.out.print("Auswahl: ");
             spielTyp = in.next();
