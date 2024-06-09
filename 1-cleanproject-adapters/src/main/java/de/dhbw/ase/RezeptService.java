@@ -10,11 +10,11 @@ public class RezeptService {
         this.apiClient = apiClient;
     }
 
-    public JSONObject getRezeptById(String id) {
+    public JSONObject getRezeptÜberId(String id) {
         return apiClient.get("lookup.php?i=" + id);
     }
 
-    public JSONObject getZutatenByRezept(String id) {
+    public JSONObject getZutatenÜberRezept(String id) {
         return apiClient.get("filter.php?i=" + id);
     }
 }

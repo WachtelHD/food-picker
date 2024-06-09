@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,11 +30,7 @@ public class ApiClientImpl implements ApiClient {
                     return new JSONObject(strCurrentLine);
                 }
             } else {
-                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                String strCurrentLine;
-                while ((strCurrentLine = br.readLine()) != null) {
-                    System.out.println(strCurrentLine);
-                }
+                throw new ApiException("Error Response in get: " + connection.getResponseCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,15 +53,13 @@ public class ApiClientImpl implements ApiClient {
                     return new JSONArray(strCurrentLine);
                 }
             } else {
-                br = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
-                String strCurrentLine;
-                while ((strCurrentLine = br.readLine()) != null) {
-                    System.out.println(strCurrentLine);
-                }
+                throw new ApiException("Error Respnonse in getArray: " + connection.getResponseCode());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
+
+    
 }

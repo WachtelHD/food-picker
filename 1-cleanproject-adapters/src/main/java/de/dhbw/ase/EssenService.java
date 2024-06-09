@@ -1,6 +1,5 @@
 package de.dhbw.ase;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class EssenService {
