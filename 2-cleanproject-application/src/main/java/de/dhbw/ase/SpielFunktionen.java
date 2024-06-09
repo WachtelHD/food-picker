@@ -9,14 +9,20 @@ public class SpielFunktionen {
 
     private final EssenService essenService;
     private final NaehrwertService naehrwertService;
+    private final BildService bildService;
+    private final KategorieService kategorieService;
     private final BenutzerEingabe in;
     private final SpielLogik spielLogik;
     private final JsonMapper json;
+    private final RezeptService rezeptService;
 
-    public SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService, JsonMapper json) {
+    public SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService, JsonMapper json, RezeptService rezeptService, BildService bildService, KategorieService kategorieService) {
         this.json = json;
         this.essenService = essenService;
         this.naehrwertService = naehrwertService;
+        this.rezeptService = rezeptService;
+        this.bildService = bildService;
+        this.kategorieService = kategorieService;
         this.in = new BenutzerEingabe();
         this.spielLogik = new SpielLogik(essenService, naehrwertService);
     }

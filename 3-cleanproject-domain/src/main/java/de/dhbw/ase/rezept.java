@@ -4,13 +4,13 @@ import java.util.List;
 
 public class rezept {
     private List<zutat> zutaten;
-    private String vorgehen;
+    private String anweisungen;
     private String youTube;
 
     // Constructor
-    public rezept(List<zutat> zutaten, String vorgehen, String youTube) {
+    public rezept(List<zutat> zutaten, String anweisungen, String youTube) {
         this.zutaten = zutaten;
-        this.vorgehen = vorgehen;
+        this.anweisungen = anweisungen;
         this.youTube = youTube;
     }
 
@@ -24,11 +24,11 @@ public class rezept {
     }
 
     public String getInstructions() {
-        return vorgehen;
+        return anweisungen;
     }
 
-    public void setInstructions(String vorgehens) {
-        this.vorgehen = vorgehens;
+    public void setInstructions(String anweisungen) {
+        this.anweisungen = anweisungen;
     }
 
     public String getYoutube() {
@@ -41,15 +41,14 @@ public class rezept {
 
     @Override
     public String toString() {
-        String zutaten = "";
-        for(zutat zutat:this.zutaten){
-            zutaten = zutaten + zutat.toString() + "\n";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Zutaten:\n");
+        for (zutat zutat : zutaten) {
+            sb.append(zutat.toString()).append("\n");
         }
-
-        return "Rezept:\n" + 
-        "Zutaten: " + "\n" +
-        zutaten +
-        "Anweisungen: " + this.vorgehen;
+        sb.append("\nAnweisungen:\n").append(anweisungen).append("\n");
+        sb.append("\nYouTube Link:\n").append(youTube).append("\n");
+        return sb.toString();
     }
 }
 

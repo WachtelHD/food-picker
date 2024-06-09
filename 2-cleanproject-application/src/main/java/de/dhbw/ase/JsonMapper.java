@@ -72,10 +72,10 @@ public class JsonMapper {
 
         JSONArray naehrwertArray = naehrwertService.getProductInfo(essenAnfrage);
 
-        List<rezeptZutat> zutaten = new ArrayList<>();
+        List<zutat> zutaten = new ArrayList<>();
         for (int i = 1; i <= 20; i++){
             if (essenJson.isNull("strIngredient" + i) || essenJson.getString("strIngredient" + i).isEmpty()) break;
-            zutaten.add(new rezeptZutat(essenJson.getString("strIngredient" + i), essenJson.getString("strMeasure" + i)));
+            zutaten.add(new zutat(essenJson.getString("strIngredient" + i), essenJson.getString("strMeasure" + i)));
         }
 
         rezept rezept = new rezept(zutaten,essenJson.getString("strInstructions"),essenJson.getString("strYoutube"));

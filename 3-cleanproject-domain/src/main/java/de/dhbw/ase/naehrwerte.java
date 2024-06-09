@@ -57,12 +57,8 @@ public class naehrwerte {
     }
 
     @Override
-    public String toString(){
-        return "Nährwerte:\n" + 
-        this.energie.toString() + "\n" +
-        this.fett.toString() + "\n" +
-        this.kohlenhydrate.toString() + "\n" +
-        "Eiweis: " + this.eiweis + "\n" +
-        "Salz: " + this.salz + "\n";
+    public String toString() {
+        return String.format("Energie: %.2f kcal\nFett: %.2f g\nKohlenhydrate: %.2f g\nEiweis: %.2f g\nSalz: %.2f g", 
+                             energie, fett, kohlenhydrate, eiweis, salz);
     }
 }
