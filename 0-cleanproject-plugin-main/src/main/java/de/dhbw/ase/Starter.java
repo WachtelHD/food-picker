@@ -62,10 +62,9 @@ public class Starter {
                     amWählen = false;
                     break;
                 default:
-					//TODO: change error6
-                    System.out.println("--------------------------------------------------------------------");
-					System.out.println("	   Bitte wählen sie eine valide Option aus");
-                    System.out.println("--------------------------------------------------------------------");
+                System.out.println("╔══════════════════════════════════════════════════╗");
+                System.out.println("║     Bitte wählen Sie eine valide Option aus      ║");
+                System.out.println("╚══════════════════════════════════════════════════╝");
 
                     break;
             }

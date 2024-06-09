@@ -144,7 +144,6 @@ public class SpielFunktionen {
         JSONObject zufälligesEssenJson = essenService.getZufälligesEssen();
         String essenId = this.getEssensId(zufälligesEssenJson);
 
-        // TODO: wieder hinzufügen -> APi calls limitiert
         // essen essenInstanz = json.generiereEssenInstanz(essenId);
         // this.essenInformationen(essenInstanz);
     }
@@ -221,7 +220,6 @@ public class SpielFunktionen {
 
             switch (wahl) {
                 case "1":
-                    //TODO: Nährwerte können nicht das genau gericht beschreiben -> extra name?
                     System.out.println("╔══════════════════════════════════════════════════╗");
                     System.out.println("║               Nährwerte                          ║");
                     System.out.println("╚══════════════════════════════════════════════════╝");
@@ -261,7 +259,6 @@ public class SpielFunktionen {
                     // beenden
                     break;
                 default:
-                    //TODO: change error
                     System.out.println("Bitte wähle eine Valide Option");
                     break;
             }
