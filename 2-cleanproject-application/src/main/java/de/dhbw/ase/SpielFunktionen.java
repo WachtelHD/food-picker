@@ -94,7 +94,7 @@ public class SpielFunktionen {
 
         while(amWählen){
             System.out.println("╔══════════════════════════════════════════════════╗");
-            System.out.println("║                      Optionen                    ║");
+            System.out.println("║                     Optionen                     ║");
             System.out.println("╚══════════════════════════════════════════════════╝");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
             System.out.println("2 - Zufällige Option ausgeben");
