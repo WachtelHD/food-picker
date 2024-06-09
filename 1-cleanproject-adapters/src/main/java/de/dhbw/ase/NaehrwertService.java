@@ -5,7 +5,9 @@ import org.json.JSONArray;
 public class NaehrwertService {
     private final ApiClient apiClient;
 
-    // recipe API
+    // Nährwerte API
+    // Indem man eine API-Call aufruft an api-ninjas, werden hier
+    // die Nährwerte eines bestimmten Rezeptes ausgegeben.
     // https://api.api-ninjas.com/v1/recipe?query=
     private static final String BASE_URL = "https://api.api-ninjas.com/v1/nutrition?query=";
 

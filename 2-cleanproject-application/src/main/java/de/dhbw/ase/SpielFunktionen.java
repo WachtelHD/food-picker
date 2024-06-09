@@ -31,8 +31,13 @@ public class SpielFunktionen {
     public void essenAusgabe() {
         String essensTyp = in.getInput("Essens Auswahl: ");
         JSONObject essenObjekt = essenService.getEssenÜberName(essensTyp);
-        String essenId = spielLogik.getEssensId(essenObjekt);
-
+        
+        if (essenObjekt == null || !essenObjekt.has("meals")) {
+            System.out.println("Kein Essen gefunden.");
+            return;
+        }
+    
+        String essenId = getEssensId(essenObjekt);
         essen essenInstanz = json.generiereEssenInstanz(essenId);
         this.essenInformationen(essenInstanz);
     }
