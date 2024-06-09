@@ -45,7 +45,9 @@ public class SpielFunktionen {
         boolean amWählen = true;
 
         while(amWählen){
-            System.out.println("Möchtest du Informationen über die verfügbaren Kategorien?");
+            System.out.println("╔══════════════════════════════════════════════════╗");
+            System.out.println("║                     Kategorien                   ║");
+            System.out.println("╚══════════════════════════════════════════════════╝");
             System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
             System.out.println("2 - Die einzelnen Kategorien Anzeigen");
             System.out.println("3 - Kategorie Auswählen");
@@ -89,7 +91,9 @@ public class SpielFunktionen {
         amWählen = true;
 
         while(amWählen){
-            System.out.println("Möchtest du Informationen über die verfügbaren Optionen?");
+            System.out.println("╔══════════════════════════════════════════════════╗");
+            System.out.println("║                      Optionen                    ║");
+            System.out.println("╚══════════════════════════════════════════════════╝");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
             System.out.println("2 - Zufällige Option ausgeben");
             System.out.println("3 - nähere Details zur aktuellen Option");
