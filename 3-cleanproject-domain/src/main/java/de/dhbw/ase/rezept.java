@@ -3,54 +3,53 @@ package de.dhbw.ase;
 import java.util.List;
 
 public class rezept {
-    private List<rezeptZutat> ingredients;
-    private String instructions;
+    private List<zutat> zutaten;
+    private String vorgehen;
     private String youTube;
 
     // Constructor
-    public rezept(List<rezeptZutat> ingredients, String instruction, String youTube) {
-        this.ingredients = ingredients;
-        this.instructions = instruction;
+    public rezept(List<zutat> zutaten, String vorgehen, String youTube) {
+        this.zutaten = zutaten;
+        this.vorgehen = vorgehen;
         this.youTube = youTube;
     }
 
     // Getters and setters
-    public List<rezeptZutat> getIngredients() {
-        return ingredients;
+    public List<zutat> getIngredients() {
+        return zutaten;
     }
 
-    public void setIngredients(List<rezeptZutat> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredients(List<zutat> zutaten) {
+        this.zutaten = zutaten;
     }
 
     public String getInstructions() {
-        return instructions;
+        return vorgehen;
     }
 
-    public void setInstructions(String instructions) {
-        this.instructions = instructions;
+    public void setInstructions(String vorgehens) {
+        this.vorgehen = vorgehens;
     }
 
     public String getYoutube() {
-        return instructions;
+        return youTube;
     }
 
     public void setYoutube(String youTube) {
         this.youTube = youTube;
     }
 
-    // toString method to represent Recipe as a string
     @Override
     public String toString() {
         String zutaten = "";
-        for(rezeptZutat zutat:this.ingredients){
+        for(zutat zutat:this.zutaten){
             zutaten = zutaten + zutat.toString() + "\n";
         }
 
         return "Rezept:\n" + 
         "Zutaten: " + "\n" +
         zutaten +
-        "Anweisungen: " + this.instructions;
+        "Anweisungen: " + this.vorgehen;
     }
 }
 
