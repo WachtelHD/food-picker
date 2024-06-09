@@ -1,0 +1,11 @@
+@startuml mocks 1
+class SpielFunktionen {
+    + getEssensId(essenObjekt: JSONObject): String
+}
+
+class TestSpielFunktionen {
+    + testGetEssensId(): void
+}
+
+SpielFunktionen --> TestSpielFunktionen
+@enduml

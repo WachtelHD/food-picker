@@ -1,0 +1,9 @@
+@startuml EssenService
+class EssenService {
+    + getEssenÜberName(String name): JSONObject
+    + getEssenÜberKategorie(String category): JSONObject
+    + getZufälligesEssen(): JSONObject
+    + getEssensKategorie(): JSONObject
+    + getEssenÜberId(String id): JSONObject
+}
+@enduml

@@ -1,0 +1,13 @@
+@startuml Hohe Kohäsion
+class rezept {
+    - zutaten: List<zutat>
+    - anweisungen: String
+    - youtubeLink: String
+
+    + getZutaten(): List<tutat>
+    + getAnweisungen(): String
+    + getYoutubeLink(): String
+    + toString(): String
+}
+rezept --> zutat
+@enduml

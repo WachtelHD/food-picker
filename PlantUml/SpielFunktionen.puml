@@ -1,0 +1,87 @@
+@startuml SpielFunktionen
+interface ApiClient {
+    +get(String endpoint): JSONObject
+    +getArray(String endpoint): JSONArray
+}
+
+class EssenService {
+    -ApiClient apiClient
+    +EssenService(ApiClient apiClient)
+    +getZufälligesEssen(): JSONObject
+    +getEssenÜberName(foodName: String): JSONObject
+    +getEssensKategorie(): JSONObject
+    +getEssenÜberId(id: String): JSONObject
+    +getEssenÜberKategorie(category: String): JSONObject
+}
+
+class NaehrwertService {
+    -ApiClient apiClient
+    +NaehrwertService(ApiClient apiClient)
+    +getProductInfo(params: String): JSONArray
+}
+
+class RezeptService {
+    -ApiClient apiClient
+    +RezeptService(ApiClient apiClient)
+    +getRezeptÜberId(id: String): JSONObject
+}
+
+class BildService {
+    +BildService()
+    +getBildUrl(id: String): String
+}
+
+class KategorieService {
+    +KategorieService()
+    +getKategorien(): JSONArray
+}
+
+class JsonMapper {
+    +JsonMapper()
+    +generiereEssenInstanz(id: String): essen
+    +generiereKategorieListe(): List<essenKategorie>
+    +generiereBasisEssenInformationListe(wahl: String): List<basisEssenInfo>
+}
+
+class BenutzerEingabe {
+    +BenutzerEingabe()
+    +getInput(prompt: String): String
+}
+
+class SpielLogik {
+    +SpielLogik(EssenService essenService, NaehrwertService naehrwertService)
+}
+
+class SpielFunktionen {
+    -EssenService essenService
+    -NaehrwertService naehrwertService
+    -BildService bildService
+    -KategorieService kategorieService
+    -BenutzerEingabe in
+    -SpielLogik spielLogik
+    -JsonMapper json
+    -RezeptService rezeptService
+    +SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService, JsonMapper json, RezeptService rezeptService, BildService bildService, KategorieService kategorieService)
+    +essenAusgabe(): void
+    +essenInSpezifischerRichtung(): void
+    +zufälligesEssen(): void
+    +essenSpiel(): void
+    +essenSpiel(essensRichtung: String): void
+    +essenInformationen(essen essen): void
+    +getEssensName(essenObjekt: JSONObject): String
+    +getEssensId(essenObjekt: JSONObject): String
+}
+
+SpielFunktionen --> EssenService
+SpielFunktionen --> NaehrwertService
+SpielFunktionen --> BildService
+SpielFunktionen --> KategorieService
+SpielFunktionen --> BenutzerEingabe
+SpielFunktionen --> SpielLogik
+SpielFunktionen --> JsonMapper
+SpielFunktionen --> RezeptService
+
+EssenService --> ApiClient
+NaehrwertService --> ApiClient
+RezeptService --> ApiClient
+@enduml

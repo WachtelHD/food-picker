@@ -1,0 +1,26 @@
+@startuml Rename Method
+class ApiClientImpl {
+    - apiSchluessel: String
+
+    + get(endpunkt: String): JSONObject
+    + getArray(endpunkt: String): JSONArray
+}
+
+interface ApiClient {
+    + get(endpunkt: String): JSONObject
+    + getArray(endpunkt: String): JSONArray
+}
+
+class ApiException {
+    + ApiException(message: String)
+    + ApiException(message: String, cause Throwable)
+}
+
+class Exception {
+
+}
+
+ApiException --|> Exception
+ApiClientImpl --|> ApiClient
+ApiClientImpl --> ApiException
+@enduml

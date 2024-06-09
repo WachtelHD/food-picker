@@ -1,0 +1,43 @@
+@startuml DIP
+interface ApiClient {
+    +get(String endpoint): JSONObject
+    +getArray(String endpoint): JSONArray
+}
+
+class EssenService {
+    -ApiClient apiClient
+    +EssenService(ApiClient apiClient)
+    +getZufälligesEssen(): JSONObject
+    +getEssenÜberName(foodName: String): JSONObject
+    +getEssensKategorie(): JSONObject
+    +getEssenÜberId(id: String): JSONObject
+    +getEssenÜberKategorie(category: String): JSONObject
+}
+
+class NaehrwertService {
+    -ApiClient apiClient
+    +NaehrwertService(ApiClient apiClient)
+    +getProductInfo(params: String): JSONArray
+}
+
+class RezeptService {
+    -ApiClient apiClient
+    +RezeptService(ApiClient apiClient)
+    +getRezeptÜberId(id: String): JSONObject
+}
+
+class JsonMapper {
+    +JsonMapper(EssenService essenService, NaehrwertService naehrwertService, RezeptService rezeptService)
+    +generiereEssenInstanz(id: String): essen
+    +generiereKategorieListe(): List<essenKategorie>
+    +generiereBasisEssenInformationListe(wahl: String): List<basisEssenInfo>
+}
+
+JsonMapper --> EssenService
+JsonMapper --> NaehrwertService
+JsonMapper --> RezeptService
+
+EssenService --> ApiClient
+NaehrwertService --> ApiClient
+RezeptService --> ApiClient
+@enduml

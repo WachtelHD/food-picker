@@ -1,0 +1,12 @@
+@startuml mocks 2
+class RezeptService {
+    + getRezeptÜberId(id: String): JSONObject
+}
+
+class TestRezeptService {
+    + testRezeptServiceGetRezeptById(): void
+}
+
+RezeptService --> ApiClient
+TestRezeptService --> RezeptService
+@enduml

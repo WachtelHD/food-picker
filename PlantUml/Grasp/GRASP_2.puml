@@ -1,0 +1,16 @@
+@startuml Geringe Kopplung
+class RezeptService {
+    - apiClient: ApiClient
+
+    + RezeptService(apiClient: ApiClient): JSONObject 
+    + getRezeptÜberId(id: String): JSONObject 
+    + getZufälligesEssen(): JSONObject
+}
+
+interface ApiClient {
+    + get(endpunkt: String): JSONObject
+    + getArray(endpunkt: String): JSONArray
+}
+
+RezeptService --> ApiClient
+@enduml

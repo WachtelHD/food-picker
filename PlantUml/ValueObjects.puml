@@ -1,0 +1,45 @@
+@startuml Value Objects
+class naehrwerte {
+    + double kalorien
+    + double fett
+    + double kohlenhydrate
+    + double protein
+    + double zucker
+}
+
+class zutat {
+    + String name
+    + String menge
+}
+
+class rezept {
+    + List<zutat> zutaten
+    + String anweisungen
+    + String youtube
+}
+
+class basisEssenInfo {
+    + String id
+    + String name
+    + String bild
+}
+
+class essenKategorie {
+    + String id
+    + String name
+    + String bild
+    + String beschreibung
+}
+
+class essen {
+    + String name
+    + Rezept rezept
+    + Naehrwerte naehrwerte
+    + String bild
+}
+
+naehrwerte --> essen
+zutat --> rezept
+rezept --> essen
+basisEssenInfo --> essenKategorie
+@enduml

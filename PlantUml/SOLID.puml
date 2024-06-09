@@ -1,0 +1,7 @@
+@startuml SRP positiv
+class BenutzerEingabe {
+    + getInput(prompt: String): String
+    + print(promt: String): void
+}
+
+@enduml

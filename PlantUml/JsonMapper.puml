@@ -1,0 +1,10 @@
+@startuml JsonMapper
+class JsonMapper {
+    - essenService: EssenService
+    - naehrwerteService: NaehrwerteService
+
+    + generiereBasisEssenInformationListe(String wahl): List<BasisEssenInfo> 
+    + generiereKategorieListe(): List<EssenKategorie>
+    + generiereEssenInstanz(String essenId): Essen
+}
+@enduml

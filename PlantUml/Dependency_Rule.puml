@@ -1,0 +1,15 @@
+@startuml Deüpendency Rule
+class ApiClientImpl {
+    - apiSchluessel: String
+
+    + get(endpunkt: String): JSONObject
+    + getArray(endpunkt: String): JSONArray
+}
+
+interface ApiClient {
+    + get(endpunkt: String): JSONObject
+    + getArray(endpunkt: String): JSONArray
+}
+
+ApiClientImpl --|> ApiClient
+@enduml
