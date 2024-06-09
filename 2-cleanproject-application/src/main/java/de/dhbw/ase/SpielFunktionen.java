@@ -259,7 +259,9 @@ public class SpielFunktionen {
                     // beenden
                     break;
                 default:
-                    System.out.println("Bitte wähle eine Valide Option");
+                System.out.println("╔══════════════════════════════════════════════════╗");
+                System.out.println("║     Bitte wählen Sie eine valide Option aus      ║");
+                System.out.println("╚══════════════════════════════════════════════════╝");
                     break;
             }
         }
