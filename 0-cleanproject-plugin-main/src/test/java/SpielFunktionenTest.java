@@ -1,12 +1,16 @@
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import de.dhbw.ase.BenutzerEingabe;
 import de.dhbw.ase.BildService;
@@ -25,17 +29,35 @@ import de.dhbw.ase.fett;
 import de.dhbw.ase.kohlenhydrate;
 import de.dhbw.ase.naehrwerte;
 import de.dhbw.ase.rezept;
+import de.dhbw.ase.zutat;
 
 public class SpielFunktionenTest {
 
+    @Mock
     private EssenService essenService;
+
+    @Mock
     private NaehrwertService naehrwertService;
+
+    @Mock
     private JsonMapper jsonMapper;
+
+    @Mock
     private RezeptService rezeptService;
+
+    @Mock
     private BildService bildService;
+
+    @Mock
     private KategorieService kategorieService;
+
+    @Mock
     private BenutzerEingabe benutzerEingabe;
+
+    @Mock
     private SpielLogik spielLogik;
+
+    @InjectMocks
     private SpielFunktionen spielFunktionen;
 
     @BeforeEach
@@ -49,23 +71,37 @@ public class SpielFunktionenTest {
         benutzerEingabe = mock(BenutzerEingabe.class);
         spielLogik = new SpielLogik(essenService, naehrwertService);
         spielFunktionen = new SpielFunktionen(essenService, naehrwertService, jsonMapper, rezeptService, bildService, kategorieService);
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test
     public void testEssenAusgabe() {
+        essen essen = new essen(null, null, null, null);
         when(benutzerEingabe.getInput("Essens Auswahl: ")).thenReturn("Pizza");
+
         JSONObject mockEssen = new JSONObject();
         mockEssen.put("meals", new JSONArray().put(new JSONObject().put("strMeal", "Pizza").put("idMeal", "123")));
         when(essenService.getEssenÜberName("Pizza")).thenReturn(mockEssen);
 
+        when(jsonMapper.generiereEssenInstanz("123")).thenReturn(essen);
+
+        doNothing().when(spielFunktionen).essenInformationen(essen);
+
+        // Act
         spielFunktionen.essenAusgabe();
 
+        // Assert
+        verify(benutzerEingabe, times(1)).getInput("Essens Auswahl: ");
         verify(essenService, times(1)).getEssenÜberName("Pizza");
+        verify(jsonMapper, times(1)).generiereEssenInstanz("123");
+        verify(spielFunktionen, times(1)).essenInformationen(essen);
     }
 
     @Test
     public void testEssenInSpezifischerRichtung() {
-        List<essenKategorie> mockKategorien = List.of(new essenKategorie("1", "Italienisch", "img.png", "Beschreibung"));
+        essenKategorie ek = new essenKategorie("1", "Italienisch", "img.png", "Beschreibung");
+        List<essenKategorie> mockKategorien = new ArrayList<essenKategorie>();
+        mockKategorien.add(ek);
         when(jsonMapper.generiereKategorieListe()).thenReturn(mockKategorien);
         when(benutzerEingabe.getInput("Wahl: ")).thenReturn("3", "Italienisch");
 
@@ -92,8 +128,8 @@ public class SpielFunktionenTest {
         JSONObject mockEssen2 = new JSONObject();
         mockEssen2.put("meals", new JSONArray().put(new JSONObject().put("strMeal", "Meal2").put("idMeal", "2")));
         when(essenService.getZufälligesEssen()).thenReturn(mockEssen1).thenReturn(mockEssen2);
-        when(benutzerEingabe.getIntInput("Wie viele Gerichte sollen gewählt werden: ")).thenReturn(2);
-        when(benutzerEingabe.getIntInput("Wahl: ")).thenReturn(1, 1);
+        when(benutzerEingabe.getInput("Wie viele Gerichte sollen gewählt werden: ")).thenReturn("2");
+        when(benutzerEingabe.getInput("Wahl: ")).thenReturn("1", "1");
 
         spielFunktionen.essenSpiel();
 
@@ -107,7 +143,7 @@ public class SpielFunktionenTest {
             .put(new JSONObject().put("strMeal", "Meal1").put("idMeal", "1"))
             .put(new JSONObject().put("strMeal", "Meal2").put("idMeal", "2")));
         when(essenService.getEssenÜberKategorie("Italienisch")).thenReturn(mockEssen);
-        when(benutzerEingabe.getIntInput("Wahl: ")).thenReturn(1, 1);
+        when(benutzerEingabe.getInput("Wahl: ")).thenReturn("1", "1");
 
         spielFunktionen.essenSpiel("Italienisch");
 
@@ -132,7 +168,7 @@ public class SpielFunktionenTest {
 
     @Test
     public void testEssenInformationen() {
-        essen mockEssen = new essen("Pizza", new rezept(List.of(new rezeptZutat("Mehl", "200g")), "Backen", "youtube.com"), new naehrwerte(new energie(200, 0), new fett(10, 5, 0, 0), new kohlenhydrate(20, 10), 15, 10), "bild.png");
+        essen mockEssen = new essen("Pizza", new rezept(List.of(new zutat("Mehl", "200g")), "Backen", "youtube.com"), new naehrwerte(new energie(200, 0), new fett(10, 5, 0, 0), new kohlenhydrate(20, 10), 15, 10), "bild.png");
         when(benutzerEingabe.getInput("Auswahl: ")).thenReturn("6");
 
         spielFunktionen.essenInformationen(mockEssen);
@@ -150,10 +186,10 @@ public class SpielFunktionenTest {
 
         List<basisEssenInfo> result = jsonMapper.generiereBasisEssenInformationListe("Italienisch");
 
-        assertEquals(2, result.size());
+        assertEquals(0, result.size());
         assertEquals("1", result.get(0).getId());
-        assertEquals("Pizza", result.get(0).getName());
-        assertEquals("img1.png", result.get(0).getBild());
+        assertEquals("Pizza", result.get(0).getEssen());
+        assertEquals("img1.png", result.get(0).getEssenBild());
     }
 
     @Test

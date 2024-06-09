@@ -2,6 +2,7 @@ package de.dhbw.ase;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,9 +33,8 @@ public class SpielFunktionen {
         JSONObject essenObjekt = essenService.getEssenÜberName(essensTyp);
         String essenId = spielLogik.getEssensId(essenObjekt);
 
-        // TODO: wieder hinzufügen -> APi calls limitiert
-        // essen essenInstanz = json.generiereEssenInstanz(essenId);
-        // this.essenInformationen(essenInstanz);
+        essen essenInstanz = json.generiereEssenInstanz(essenId);
+        this.essenInformationen(essenInstanz);
     }
 
     public void essenInSpezifischerRichtung() {
@@ -43,6 +43,8 @@ public class SpielFunktionen {
 
         basisEssenInfo option = null;
         boolean amWählen = true;
+
+        System.out.println("test");
 
         while(amWählen){
             System.out.println("╔══════════════════════════════════════════════════╗");
@@ -199,7 +201,7 @@ public class SpielFunktionen {
         this.essenInformationen(essenInstanz);
     }
 
-    private void essenInformationen(essen essen) {
+    public void essenInformationen(essen essen) {
         boolean amWählen = true;
 
         while(amWählen){
