@@ -6,10 +6,11 @@ public class Starter {
 
     public static void main(String[] args) {
         // Initialisierung
-        ApiClient mealApiClient = new ApiClientImpl("1");
-    	EssenService mealService = new EssenService(mealApiClient);
-        NaehrwertService nutritionService = new NaehrwertService(new ApiClientImpl("3kTkxnTFVv/5fW3/lKu70A==fHOzKx39l17N3X0C"));
-        SpielFunktionen functions = new SpielFunktionen(mealService, nutritionService);
+        ApiClient essenApiClient = new ApiClientImpl("1");
+    	EssenService essenService = new EssenService(essenApiClient);
+        NaehrwertService naehrwerteService = new NaehrwertService(new ApiClientImpl("3kTkxnTFVv/5fW3/lKu70A==fHOzKx39l17N3X0C"));
+        JsonMapper json = new JsonMapper(essenService, naehrwerteService);
+        SpielFunktionen functions = new SpielFunktionen(essenService, naehrwerteService, json);
         Scanner in = new Scanner(System.in);
 
         String spielTyp = "";

@@ -2,8 +2,6 @@ package de.dhbw.ase;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -11,34 +9,33 @@ public class SpielFunktionen {
 
     private final EssenService essenService;
     private final NaehrwertService naehrwertService;
-    private final Scanner in;
-    private final JsonMapper json; // Angenommen, dass JsonMapper ebenfalls angepasst wurde
+    private final BenutzerEingabe in;
+    private final SpielLogik spielLogik;
+    private final JsonMapper json;
 
-    public SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService) {
+    public SpielFunktionen(EssenService essenService, NaehrwertService naehrwertService, JsonMapper json) {
+        this.json = json;
         this.essenService = essenService;
         this.naehrwertService = naehrwertService;
-        this.in = new Scanner(System.in);
-        this.json = new JsonMapper(essenService, naehrwertService);
+        this.in = new BenutzerEingabe();
+        this.spielLogik = new SpielLogik(essenService, naehrwertService);
     }
 
-    public void essenAusgabe(){
-        System.out.print("Essens Auswahl: ");
-        String essensTyp = in.next();
+    public void essenAusgabe() {
+        String essensTyp = in.getInput("Essens Auswahl: ");
         JSONObject essenObjekt = essenService.getEssenÜberName(essensTyp);
-        String essenId = this.getEssensId(essenObjekt);
+        String essenId = spielLogik.getEssensId(essenObjekt);
 
         // TODO: wieder hinzufügen -> APi calls limitiert
         // essen essenInstanz = json.generiereEssenInstanz(essenId);
         // this.essenInformationen(essenInstanz);
     }
 
-    public void essenInSpezifischerRichtung(){
-
+    public void essenInSpezifischerRichtung() {
         List<essenKategorie> essenkat = json.generiereKategorieListe();
         List<basisEssenInfo> essenBasisInfoArray = new ArrayList<>();
 
         basisEssenInfo option = null;
-
         boolean amWählen = true;
 
         while(amWählen){
@@ -46,8 +43,7 @@ public class SpielFunktionen {
             System.out.println("1 - Vollständige Informationen über die Kategorien Anzeigen");
             System.out.println("2 - Die einzelnen Kategorien Anzeigen");
             System.out.println("3 - Kategorie Auswählen");
-            System.out.print("Wahl: ");
-            String wahl = in.next();
+            String wahl = in.getInput("Wahl: ");
 
             switch (wahl) {
                 case "1":
@@ -74,10 +70,9 @@ public class SpielFunktionen {
 
         amWählen = true;
 
-        while(amWählen){
-            System.out.print("Wahl: ");
-            String wahl = in.next();
-            try{
+        while (amWählen) {
+            String wahl = in.getInput("Wahl: ");
+            try {
                 essenBasisInfoArray = json.generiereBasisEssenInformationListe(wahl);
                 amWählen = false;
             } catch (Exception e) {
@@ -91,10 +86,9 @@ public class SpielFunktionen {
             System.out.println("Möchtest du Informationen über die verfügbaren Optionen?");
             System.out.println("1 - Vollständige Informationen über Optionen ausgeben");
             System.out.println("2 - Zufällige Option ausgeben");
-            System.out.println("3 - nähere details zur aktuellen Option");
-            System.out.println("4 - Optionen über essens id anzeigen");
-            System.out.print("Wahl: ");
-            String wahl = in.next();
+            System.out.println("3 - nähere Details zur aktuellen Option");
+            System.out.println("4 - Optionen über Essens-ID anzeigen");
+            String wahl = in.getInput("Wahl: ");
 
             switch (wahl) {
                 case "1":
@@ -117,8 +111,7 @@ public class SpielFunktionen {
                     break;
                 case "4":
                     // Details des essens über id anzeigen
-                    System.out.print("Id: ");
-                    String id = in.next();
+                    String id = in.getInput("Id: ");
                     essen essenÜberId = json.generiereEssenInstanz(id);
                     this.essenInformationen(essenÜberId);
                     amWählen = false;
@@ -141,26 +134,20 @@ public class SpielFunktionen {
 
     public void essenSpiel() {
         List<JSONObject> mealArray = new ArrayList<>();
-        System.out.print("Wie viele Gerichte sollen gewählt werden: ");
-        int anzahl = in.nextInt();
+        int anzahl = Integer.parseInt(in.getInput("Wie viele Gerichte sollen gewählt werden: "));
 
         for(int i = 0; i <= anzahl; i++) {
             JSONObject zufälligesEssen = essenService.getZufälligesEssen();
             mealArray.add(zufälligesEssen);
         }
-        while(true) {
-            System.out.print("Essen 1: ");
-            System.out.println(getEssensName(mealArray.get(0)));
-            System.out.print("Essen 2: ");
-            System.out.println(getEssensName(mealArray.get(1)));
-            System.out.print("Wahl: ");
-            int wahl = in.nextInt();
-            if(mealArray.size() == 2) {
-                break;
-            }
-            if(wahl == 1){
+
+        while (mealArray.size() > 1) {
+            System.out.println("Essen 1: " + getEssensName(mealArray.get(0)));
+            System.out.println("Essen 2: " + getEssensName(mealArray.get(1)));
+            int wahl = Integer.parseInt(in.getInput("Wahl: "));
+            if (wahl == 1) {
                 mealArray.remove(1);
-            } else if( wahl == 2) {
+            } else if (wahl == 2) {
                 mealArray.remove(0);
             } else {
                 System.out.print("Wähle bitte eine Valide Option");
@@ -168,13 +155,9 @@ public class SpielFunktionen {
             }
         }
 
-        System.out.println(mealArray.get(0));
-
         String essenId = this.getEssensId(mealArray.get(0));
-
-        essen essen = json.generiereEssenInstanz(essenId);
-
-        this.essenInformationen(essen);
+        essen essenInstanz = json.generiereEssenInstanz(essenId);
+        this.essenInformationen(essenInstanz);
     }
 
     public void essenSpiel(String essensRichtung) {
@@ -182,31 +165,28 @@ public class SpielFunktionen {
         List<JSONObject> mealArray = new ArrayList<>();
         List<Object> essenArray = zufälligesEssen.getJSONArray("meals").toList();
 
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < Math.min(essenArray.size(), 10); i++) {
             JSONObject essen = new JSONObject(essenArray.get(i).toString());
             mealArray.add(essen);
         }
 
-        while(true) {
-            System.out.print("Essen 1: ");
-            System.out.println(mealArray.get(0).get("strMeal"));
-            System.out.print("Essen 2: ");
-            System.out.println(mealArray.get(1).get("strMeal"));
-            System.out.print("Wahl: ");
-            int wahl = in.nextInt();
-            if(mealArray.size() == 2){
-                System.out.println("Wahl: " + mealArray.get(0).get("strMeal"));
-                break;
-            }
-            if(wahl == 1){
+        while (mealArray.size() > 1) {
+            System.out.println("Essen 1: " + mealArray.get(0).get("strMeal"));
+            System.out.println("Essen 2: " + mealArray.get(1).get("strMeal"));
+            int wahl = Integer.parseInt(in.getInput("Wahl: "));
+            if (wahl == 1) {
                 mealArray.remove(1);
-            } else if( wahl == 2) {
+            } else if (wahl == 2) {
                 mealArray.remove(0);
             } else {
                 System.out.print("Wähle bitte eine Valide Option");
                 //TODO: catch wrong user input    
             }
         }
+
+        String essenId = mealArray.get(0).getString("idMeal");
+        essen essenInstanz = json.generiereEssenInstanz(essenId);
+        this.essenInformationen(essenInstanz);
     }
 
     private void essenInformationen(essen essen) {
@@ -220,10 +200,7 @@ public class SpielFunktionen {
             System.out.println("4 - Vollständige Informationen");
             System.out.println("5 - Bild falls verfügbar");
             System.out.println("6 - Beenden");
-
-            System.out.print("Auswahl: ");
-
-            String wahl = in.next();
+            String wahl = in.getInput("Auswahl: ");
 
             switch (wahl) {
                 case "1":
